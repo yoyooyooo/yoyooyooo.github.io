@@ -397,7 +397,7 @@ body {
 	z-index: -1;
 }*/
 #page {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column; }
 
@@ -466,14 +466,14 @@ h6 {
   margin: 0 auto;
   width: 90%;
   max-width: 1000px;
-  height: 100%; }
+  flex: 1; }
 
 #primary.home {
   width: 73%;
   float: left; }
 
 #primary {
-  max-width: 850px;
+  max-width: 900px;
   margin: 0 auto; }
 
 @media only screen and (max-width: 750px) {
