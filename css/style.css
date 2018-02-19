@@ -531,14 +531,36 @@ h6 {
       margin-left: 30px;
       display: inline-block; }
       #nav-top .nav-top-items .menu-item a {
-        color: rgba(0, 0, 0, 0.6); }
+        color: rgba(0, 0, 0, 0.6);
+        position: relative; }
+        #nav-top .nav-top-items .menu-item a:after {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          height: 2px;
+          bottom: 0;
+          left: 51%;
+          right: 51%;
+          bottom: -4px;
+          background: #c05b4d;
+          transition-duration: 0.2s;
+          transition-property: right, left;
+          transition-timing-function: ease-out; }
+        #nav-top .nav-top-items .menu-item a:hover:after {
+          right: 0;
+          left: 0; }
 
 .posts {
   margin-bottom: 20px;
   border-bottom: 1px solid #eee; }
 
 .post {
-  padding: 40px 0; }
+  margin: 2em 0;
+  padding: 1.25em 1.25em 0.625em 1.25em;
+  background-color: #fff;
+  border-radius: 0.1875em;
+  border: none;
+  box-shadow: 0px 0px 25px 1px rgba(46, 61, 73, 0.2); }
   .post + .post {
     border-top: 1px solid #eee; }
   .post .post-excerpt img {
@@ -562,15 +584,19 @@ h6 {
       left: 0; }
     .post .post-header .post-link:after {
       content: '';
-      display: block;
+      position: absolute;
+      z-index: -1;
       height: 2px;
-      background-color: #4d89fb;
-      width: 100%;
-      transform: scaleX(0);
-      transition: transform 0.25s ease-out;
-      transform-origin: center center; }
+      bottom: 0;
+      left: 51%;
+      right: 51%;
+      background: #c05b4d;
+      transition-duration: 0.2s;
+      transition-property: right, left;
+      transition-timing-function: ease-out; }
     .post .post-header .post-link:hover:after {
-      transform: scaleX(1); }
+      right: 0;
+      left: 0; }
   .post .post-time {
     color: #aaa;
     display: block;
@@ -933,6 +959,7 @@ h6 {
       line-height: 34px; }
   .archive .archive-post {
     margin: 15px 0;
+    position: relative;
     transition: 0.25s ease-out; }
     .archive .archive-post .archive-post-time {
       float: left;
@@ -949,15 +976,18 @@ h6 {
         color: #333333; }
     .archive .archive-post::first-child {
       margin-top: 20px; }
-    .archive .archive-post:after {
+    .archive .archive-post:before {
       content: '';
-      display: block;
+      position: absolute;
+      z-index: -1;
       height: 1px;
-      background-color: #4d89fb;
-      width: 100%;
-      transform: scaleX(0);
-      transition: 0.25s ease-out;
-      transform-origin: left center; }
+      bottom: 0;
+      left: 0%;
+      right: 100%;
+      background: #4d89fb;
+      transition-duration: 0.2s;
+      transition-property: right, left;
+      transition-timing-function: ease-out; }
     .archive .archive-post:hover {
       transform: translateX(4px);
       border-left: 3px solid #4d89fb; }
@@ -965,8 +995,9 @@ h6 {
         color: #4d89fb; }
       .archive .archive-post:hover .archive-post-title .archive-post-link {
         color: #4d89fb; }
-      .archive .archive-post:hover:after {
-        transform: scaleX(1); }
+      .archive .archive-post:hover:before {
+        left: 0%;
+        right: 0%; }
 
 .tag-cloud {
   margin: 2em 0 3em;
