@@ -579,7 +579,8 @@ h6 {
   .post .post-excerpt p {
     margin: 0 0 16px; }
   .post .post-content {
-    margin-bottom: 40px; }
+    margin-bottom: 40px;
+    border-top: 1px solid #cfd8dc; }
     .post .post-content h1 {
       font-size: 1.3em;
       font-weight: 400;
@@ -639,7 +640,8 @@ h6 {
       max-width: 100%;
       margin: 10px 0;
       border-spacing: 0; }
-      .post .post-content > table th, .post .post-content > table td {
+      .post .post-content > table th,
+      .post .post-content > table td {
         padding: 5px 15px;
         border: 1px double #f0f0f0;
         text-align: left; }
