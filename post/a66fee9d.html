@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="redux文档总结(一)"/>
+  <meta name="description" content="redux文档整理(一)"/>
 
 
 
@@ -35,17 +35,17 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/a66fee9d.html"/>
 
 
-<meta name="description" content="概念store：所有的 state 都以一个对象树的形式储存在一个单一的 store 中。action ：一个描述发生什么的普通对象，惟一改变 state 的办法是触发 action。reducers：描述 action 如何改变 state 树。 应该把要做的修改变成一个普通对象(action)，而不是直接修改 state。然后编写专门的函数(reducer)来决定每个 action 如何改变应">
+<meta name="description" content="概念store：(也称为 state tree) 是一个宽泛的概念， 但是在 Redux API 中，通常是指一个唯一的 state 值，由 store 管理且由 getState() 方法获得。它表示了 Redux 应用的全部状态，通常为一个多层嵌套的对象。约定俗成，顶层 state 或为一个对象，或像 Map 那样的键-值集合，也可以是任意的数据类型。然而你应尽可能确保 state 可以被序列">
 <meta name="keywords" content="React,Redux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redux文档总结(一)">
+<meta property="og:title" content="redux文档整理(一)">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/a66fee9d.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="概念store：所有的 state 都以一个对象树的形式储存在一个单一的 store 中。action ：一个描述发生什么的普通对象，惟一改变 state 的办法是触发 action。reducers：描述 action 如何改变 state 树。 应该把要做的修改变成一个普通对象(action)，而不是直接修改 state。然后编写专门的函数(reducer)来决定每个 action 如何改变应">
-<meta property="og:updated_time" content="2018-02-19T16:53:33.977Z">
+<meta property="og:description" content="概念store：(也称为 state tree) 是一个宽泛的概念， 但是在 Redux API 中，通常是指一个唯一的 state 值，由 store 管理且由 getState() 方法获得。它表示了 Redux 应用的全部状态，通常为一个多层嵌套的对象。约定俗成，顶层 state 或为一个对象，或像 Map 那样的键-值集合，也可以是任意的数据类型。然而你应尽可能确保 state 可以被序列">
+<meta property="og:updated_time" content="2018-02-20T15:36:21.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redux文档总结(一)">
-<meta name="twitter:description" content="概念store：所有的 state 都以一个对象树的形式储存在一个单一的 store 中。action ：一个描述发生什么的普通对象，惟一改变 state 的办法是触发 action。reducers：描述 action 如何改变 state 树。 应该把要做的修改变成一个普通对象(action)，而不是直接修改 state。然后编写专门的函数(reducer)来决定每个 action 如何改变应">
+<meta name="twitter:title" content="redux文档整理(一)">
+<meta name="twitter:description" content="概念store：(也称为 state tree) 是一个宽泛的概念， 但是在 Redux API 中，通常是指一个唯一的 state 值，由 store 管理且由 getState() 方法获得。它表示了 Redux 应用的全部状态，通常为一个多层嵌套的对象。约定俗成，顶层 state 或为一个对象，或像 Map 那样的键-值集合，也可以是任意的数据类型。然而你应尽可能确保 state 可以被序列">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -70,7 +70,7 @@
 
 
 
-    <title> redux文档总结(一) - yooo </title>
+    <title> redux文档整理(一) - yooo </title>
   </head>
 
   <body>
@@ -116,7 +116,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          redux文档总结(一)
+          redux文档整理(一)
         
       </h1>
 
@@ -129,9 +129,30 @@
 
     
             <div class="post-content">
-            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p><strong>store</strong>：所有的 state 都以一个对象树的形式储存在一个单一的 store 中。<br><strong>action</strong> ：一个描述发生什么的普通对象，惟一改变 state 的办法是触发 action。<br><strong>reducers</strong>：描述 action 如何改变 state 树。</p>
-<p>应该把要做的修改变成一个普通对象(action)，而不是直接修改 state。然后编写专门的函数(reducer)来决定每个 action 如何改变应用的 tate。</p>
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p><strong>store</strong>：(也称为 state tree) 是一个宽泛的概念， 但是在 Redux API 中，通常是指一个唯一的 state 值，由 store 管理且由 getState() 方法获得。它表示了 Redux 应用的全部状态，通常为一个多层嵌套的对象。约定俗成，顶层 state 或为一个对象，或像 Map 那样的键-值集合，也可以是任意的数据类型。然而你应尽可能确保 state 可以被序列化，而且不要把什么数据都放进去，导致无法轻松地把 state 转换成 JSON。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Store = &#123;</span><br><span class="line">  dispatch: Dispatch</span><br><span class="line">  getState: <span class="function"><span class="params">()</span> =&gt;</span> State</span><br><span class="line">  subscribe: <span class="function">(<span class="params">listener: (</span>) =&gt;</span> <span class="keyword">void</span>) =&gt; <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">void</span></span><br><span class="line">  replaceReducer: <span class="function">(<span class="params">reducer: Reducer</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Store 维持着应用的 state tree 对象。 因为应用的构建发生于 reducer，所以一个 Redux 应用中应当只有一个 Store。</p>
+<ul>
+<li>dispatch(action)  是上述的 base dispatch function。</li>
+<li>getState()  返回当前 store 的 state。</li>
+<li>subscribe(listener)  注册一个 state 发生变化时的回调函数。</li>
+<li>replaceReducer(nextReducer)  可用于热重载和代码分割。通常你不需要用到这个 API。</li>
+</ul>
+<p><strong>action</strong> ：一个普通对象，用来表示即将改变 state 的意图，它是将数据放入 store (改变 state)的唯一途径。无论是从 UI 事件、网络回调，还是其他诸如 WebSocket 之类的数据源所获得的数据，最终都会被 dispatch 成 action。约定俗成，action 必须拥有一个  type  域，它指明了需要被执行的 action type。Type 可以被定义为常量，然后从其他 module 导入。比起用  Symbols  表示  type，使用 String 是更好的方法，因为 string 可以被序列化。除了  type  之外，action 对象的结构其实完全取决于你自己。</p>
+<p><strong>reducers</strong>：描述 action 如何改变 state 树。<br><code>type Reducer&lt;S, A&gt; = (state: S, action: A) =&gt; S</code><br>Reducer (也称为 reducing function) 函数接受两个参数：之前累积运算的结果和当前被累积的值，返回的是一个新的累积结果。该函数把一个集合归并成一个单值。<br>Reducer 并不是 Redux 特有的函数 —— 它是函数式编程中的一个基本概念，甚至大部分的非函数式语言比如 JavaScript，都有一个内置的 reduce API。对于 JavaScript，这个 API 是 Array.prototype.reduce().<br>在 Redux 中，累计运算的结果是 state 对象，而被累积的值是 action。Reducer 由上次累积的结果 state 与当前被累积的 action 计算得到一个新 state。这些 Reducer 必须是纯函数，而且当输入相同时返回的结果也会相同。它们不应该产生任何副作用。</p>
+<p><strong>dispatch 函数</strong>：<br><code>type BaseDispatch = (a: Action) =&gt; Action</code><br><code>type Dispatch = (a: Action | AsyncAction) =&gt; any</code><br>dispatching function (或简言之  dispatch function) 是一个接收 action 或者异步 action 的函数，该函数要么往 store 分发一个或多个 action，要么不分发任何 action。</p>
+<p><strong>Action Creator</strong>：一个创建 action 的函数。<br><code>type ActionCreator = (...args: any) =&gt; Action | AsyncAction</code><br>Action 是一个信息的负载，而 action creator 是一个创建 action 的工厂。调用 action creator 只会生产 action，但不分发。你需要调用 store 的  dispatch function 才会引起变化。有时我们讲  bound action creator，是指一个函数调用了 action creator 并立即将结果分发给一个特定的 store 实例。如果 action creator 需要读取当前的 state、调用 API、或引起诸如路由变化等副作用，那么它应该返回一个异步 action 而不是 action。</p>
+<p><strong>异步 Action</strong>：一个发给 dispatching 函数的值，但是这个值还不能被 reducer 消费。在发往 base dispatch() function 之前，middleware  会把异步 action 转换成一个或一组 action。异步 action 可以有多种 type，这取决于你所使用的 middleware。它通常是 Promise 或者 thunk 之类的异步原生数据类型，虽然不会立即把数据传递给 reducer，但是一旦操作完成就会触发 action 的分发事件。</p>
+<p><strong>Middleware</strong>：<br><code>type MiddlewareAPI = { dispatch: Dispatch, getState: () =&gt; State }</code> <code>type Middleware = (api: MiddlewareAPI) =&gt; (next: Dispatch) =&gt; Dispatch</code><br>Middleware 是一个组合  dispatch function  的高阶函数，返回一个新的 dispatch function，通常将异步 actions  转换成 action。<br>Middleware 利用复合函数使其可以组合其他函数，可用于记录 action 日志、产生其他诸如变化路由的副作用，或将异步的 API 调用变为一组同步的 action。<a href="http://www.redux.org.cn/docs/api/applyMiddleware.html" target="_blank" rel="noopener">详情</a></p>
+<hr>
+<p><strong>应该把要做的修改变成一个普通对象(action)，而不是直接修改 state。然后编写专门的函数(reducer)来决定每个 action 如何改变应用的 tate。</strong></p>
 <p>Redux 没有 Dispatcher 且不支持多个 store。相反，只有一个单一的 store 和一个根级的 reduce 函数（reducer）。随着应用不断变大，你应该把根级的 reducer 拆成多个小的 reducers，分别独立地操作 state 树的不同部分，而不是添加新的 stores。这就像一个 React 应用只有一个根级的组件，这个根组件又由很多小组件构成。</p>
+<p><strong>redux 三大原则</strong>：</p>
+<ul>
+<li><strong>单一数据源</strong>：整个应用的 state 被储存在一棵 object tree 中，并且这个 object tree 只存在于唯一一个 store 中。</li>
+<li><strong>State 是只读的</strong>：惟一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。</li>
+<li><strong>使用纯函数来执行修改</strong>：为了描述 action 如何改变 state tree ，你需要编写 reducers。</li>
+</ul>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个 reducer，形式为 (state, action) =&gt; state 的纯函数。</span></span><br><span class="line"><span class="comment"> * 描述了 action 如何把 state 转变成下一个 state。</span></span><br><span class="line"><span class="comment"> * state 的形式取决于你，当state变化时需要返回全新的对象，而不是修改传入的参数。</span></span><br><span class="line"><span class="comment"> * 下面例子使用 `switch` 语句和字符串来做判断，但你可以写帮助类(helper)</span></span><br><span class="line"><span class="comment"> * 根据不同的约定（如方法映射）来判断，只要适用你的项目即可。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span>(<span class="params">state = <span class="number">0</span>, action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'INCREMENT'</span>:</span><br><span class="line">            <span class="keyword">return</span> state + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'DECREMENT'</span>:</span><br><span class="line">            <span class="keyword">return</span> state - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 Redux store 来存放应用的状态。</span></span><br><span class="line"><span class="comment">// API 是 &#123; subscribe, dispatch, getState &#125;。</span></span><br><span class="line"><span class="keyword">let</span> store = createStore(counter);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以手动订阅更新，也可以事件绑定到视图层。</span></span><br><span class="line">store.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(store.getState()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改变内部 state 惟一方法是 dispatch 一个 action。</span></span><br><span class="line"><span class="comment">// action 可以被序列化，用日记记录和储存下来，后期还可以以回放的方式执行</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'INCREMENT'</span> &#125;);</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'INCREMENT'</span> &#125;);</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'DECREMENT'</span> &#125;);</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 
             </div>
