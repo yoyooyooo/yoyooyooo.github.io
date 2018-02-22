@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="30S读懂的js代码之杂"/>
+
+
+
+
+  <meta name="keywords" content="Javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="yooo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myfavicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://yoyooyooo.github.io/post/d88ffb6f.html"/>
+
+
+<meta name="description" content="列举字符串所有排列组合使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map()将字母与每部分字谜组合，然后使用 reduce()将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。 1234567891011121314151617181920const anagrams = (str) =&amp;gt; &amp;#123;  if (str.length &amp;lt;= 2) re">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30S读懂的js代码之杂">
+<meta property="og:url" content="https://yoyooyooo.github.io/post/d88ffb6f.html">
+<meta property="og:site_name" content="yooo">
+<meta property="og:description" content="列举字符串所有排列组合使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map()将字母与每部分字谜组合，然后使用 reduce()将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。 1234567891011121314151617181920const anagrams = (str) =&amp;gt; &amp;#123;  if (str.length &amp;lt;= 2) re">
+<meta property="og:updated_time" content="2018-02-22T14:57:34.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="30S读懂的js代码之杂">
+<meta name="twitter:description" content="列举字符串所有排列组合使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map()将字母与每部分字谜组合，然后使用 reduce()将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。 1234567891011121314151617181920const anagrams = (str) =&amp;gt; &amp;#123;  if (str.length &amp;lt;= 2) re">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 30S读懂的js代码之杂 - yooo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">yooo</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          30S读懂的js代码之杂
+        
+      </h1>
+
+      <time class="post-time">
+          Feb 22 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="列举字符串所有排列组合"><a href="#列举字符串所有排列组合" class="headerlink" title="列举字符串所有排列组合"></a><strong>列举字符串所有排列组合</strong></h1><p>使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map()将字母与每部分字谜组合，然后使用 reduce()将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> anagrams = <span class="function">(<span class="params">str</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (str.length &lt;= <span class="number">2</span>) <span class="keyword">return</span> str.length === <span class="number">2</span> ? [str, str[<span class="number">1</span>] + str[<span class="number">0</span>]] : [str];</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">    .split(<span class="string">''</span>)</span><br><span class="line">    .reduce(</span><br><span class="line">      (acc, letter, i) =&gt; acc.concat(anagrams(str.slice(<span class="number">0</span>, i) + str.slice(i + <span class="number">1</span>)).map(<span class="function">(<span class="params">val</span>) =&gt;</span> letter + val)),</span><br><span class="line">      []</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//anagrams('abc') -&gt; ['abc','acb','bac','bca','cab','cba']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> anagrams = <span class="function">(<span class="params">str</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (str.length &lt;= <span class="number">2</span>) <span class="keyword">return</span> str.length === <span class="number">2</span> ? [str, str[<span class="number">1</span>] + str[<span class="number">0</span>]] : [str];</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">    .split(<span class="string">''</span>)</span><br><span class="line">    .reduce(</span><br><span class="line">      (acc, letter, i) =&gt; acc.concat(anagrams(str.slice(<span class="number">0</span>, i) + str.slice(i + <span class="number">1</span>)).map(<span class="function">(<span class="params">val</span>) =&gt;</span> letter + val)),</span><br><span class="line">      []</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>str.slice(0, i) + str.slice(i + 1)排除第 i 个字母重新组合字符串，通过 anagrams 本身处理后再加回第 i 个字母</p>
+<h1 id="大写每个单词的首字母"><a href="#大写每个单词的首字母" class="headerlink" title="大写每个单词的首字母"></a><strong>大写每个单词的首字母</strong></h1><p>使用 replace()匹配每个单词的第一个字符，并使用 toUpperCase()来将其大写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> capitalizeEveryWord = <span class="function">(<span class="params">str</span>) =&gt;</span> str.replace(<span class="regexp">/\b[a-z]/g</span>, (char) =&gt; char.toUpperCase());</span><br><span class="line">capitalizeEveryWord(<span class="string">'hello world!'</span>); <span class="comment">//'Hello World!'</span></span><br></pre></td></tr></table></figure>
+<h1 id="首字母大写"><a href="#首字母大写" class="headerlink" title="首字母大写"></a><strong>首字母大写</strong></h1><p>使用 slice(0,1)和 toUpperCase()大写第一个字母，slice(1)获取字符串的其余部分。 省略 lowerRest 参数以保持字符串的其余部分不变，或将其设置为 true 以转换为小写。（注意：这和上一个示例不是同一件事情）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> capitalize = <span class="function">(<span class="params">str, lowerRest = <span class="literal">false</span></span>) =&gt;</span></span><br><span class="line">  str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + (lowerRest ? str.slice(<span class="number">1</span>).toLowerCase() : str.slice(<span class="number">1</span>));</span><br><span class="line"><span class="comment">//capitalize('myName', true) -&gt; 'Myname'</span></span><br></pre></td></tr></table></figure>
+<h1 id="检查回文"><a href="#检查回文" class="headerlink" title="检查回文"></a><strong>检查回文</strong></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> palindrome = <span class="function">(<span class="params">str</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> s = str.toLowerCase().replace(<span class="regexp">/[\W_]/g</span>, <span class="string">''</span>); <span class="comment">//除去非字母字符</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    s ===</span><br><span class="line">    s</span><br><span class="line">      .split(<span class="string">''</span>)</span><br><span class="line">      .reverse()</span><br><span class="line">      .join(<span class="string">''</span>)</span><br><span class="line">  ); <span class="comment">//检查是否和字符串的反向相等</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//palindrome('taco cat') -&gt; true</span></span><br></pre></td></tr></table></figure>
+<h1 id="当前-URL"><a href="#当前-URL" class="headerlink" title="当前 URL"></a><strong>当前 URL</strong></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUrl = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">window</span>.location.href;</span><br><span class="line">currentUrl(); <span class="comment">//当前地址</span></span><br></pre></td></tr></table></figure>
+<h1 id="Curry"><a href="#Curry" class="headerlink" title="Curry"></a><strong>Curry</strong></h1><p>使用递归。如果提供的参数（args）数量足够，则调用传递函数 f，否则返回一个 curried 函数 f。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> curry = <span class="function">(<span class="params">fn, arity = fn.length, ...args</span>) =&gt;</span></span><br><span class="line">  arity &lt;= args.length ? fn(...args) : curry.bind(<span class="literal">null</span>, fn, arity, ...args);</span><br><span class="line">curry(<span class="built_in">Math</span>.pow)(<span class="number">2</span>)(<span class="number">10</span>); <span class="comment">//1024</span></span><br><span class="line">curry(<span class="built_in">Math</span>.min, <span class="number">3</span>)(<span class="number">10</span>)(<span class="number">50</span>)(<span class="number">2</span>); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<h1 id="两点之间的距离"><a href="#两点之间的距离" class="headerlink" title="两点之间的距离"></a><strong>两点之间的距离</strong></h1><p>使用 Math.hypot()计算两点之间的欧几里德距离。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> distance = <span class="function">(<span class="params">x0, y0, x1, y1</span>) =&gt;</span> <span class="built_in">Math</span>.hypot(x1 - x0, y1 - y0);</span><br><span class="line"><span class="comment">// distance(1,1, 2,3) -&gt; 2.23606797749979</span></span><br></pre></td></tr></table></figure>
+<h1 id="可以按数字整除"><a href="#可以按数字整除" class="headerlink" title="可以按数字整除"></a><strong>可以按数字整除</strong></h1><p>使用模运算符(％)来检查余数是否等于 0。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isDivisible = <span class="function">(<span class="params">dividend, divisor</span>) =&gt;</span> dividend % divisor === <span class="number">0</span>;</span><br><span class="line"><span class="comment">// isDivisible(6,3) -&gt; true</span></span><br></pre></td></tr></table></figure>
+<h1 id="转义正则表达式"><a href="#转义正则表达式" class="headerlink" title="转义正则表达式"></a><strong>转义正则表达式</strong></h1><p>使用 replace()来转义特殊字符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> escapeRegExp = <span class="function">(<span class="params">str</span>) =&gt;</span> str.replace(<span class="regexp">/[.*+?^$&#123;&#125;()|[\]\\]/g</span>, <span class="string">'\\$&amp;'</span>);</span><br><span class="line"><span class="comment">// escapeRegExp('(test)') -&gt; \(test\)</span></span><br></pre></td></tr></table></figure>
+<h1 id="偶数或奇数"><a href="#偶数或奇数" class="headerlink" title="偶数或奇数"></a><strong>偶数或奇数</strong></h1><p>使用 Math.abs()将逻辑扩展为负数，使用模(％)运算符进行检查。 如果数字是偶数，则返回 true；如果数字是奇数，则返回 false。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isEven = <span class="function">(<span class="params">num</span>) =&gt;</span> num % <span class="number">2</span> === <span class="number">0</span>;</span><br><span class="line"><span class="comment">// isEven(3) -&gt; false</span></span><br></pre></td></tr></table></figure>
+<h1 id="阶乘"><a href="#阶乘" class="headerlink" title="阶乘"></a><strong>阶乘</strong></h1><p>使用递归。如果 n 小于或等于 1，则返回 1。否则返回 n 和 n - 1 的阶乘的乘积。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> factorial = <span class="function">(<span class="params">n</span>) =&gt;</span> (n &lt;= <span class="number">1</span> ? <span class="number">1</span> : n * factorial(n - <span class="number">1</span>));</span><br><span class="line"><span class="comment">// factorial(6) -&gt; 720</span></span><br></pre></td></tr></table></figure>
+<h1 id="斐波那契数组生成器"><a href="#斐波那契数组生成器" class="headerlink" title="斐波那契数组生成器"></a><strong>斐波那契数组生成器</strong></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fibonacci = <span class="function">(<span class="params">n</span>) =&gt;</span></span><br><span class="line">  <span class="built_in">Array</span>(n)</span><br><span class="line">    .fill(<span class="number">0</span>)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">acc, val, i</span>) =&gt;</span> acc.concat(i &gt; <span class="number">1</span> ? acc[i - <span class="number">1</span>] + acc[i - <span class="number">2</span>] : i), []);</span><br><span class="line"><span class="comment">// fibonacci(5) -&gt; [0,1,1,2,3]</span></span><br></pre></td></tr></table></figure>
+<h1 id="获取滚动位置"><a href="#获取滚动位置" class="headerlink" title="获取滚动位置"></a><strong>获取滚动位置</strong></h1><p>如果已定义，请使用 pageXOffset 和 pageYOffset，否则使用 scrollLeft 和 scrollTop，可以省略 el 来使用 window 的默认值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getScrollPos = <span class="function">(<span class="params">el = <span class="built_in">window</span></span>) =&gt;</span> (&#123;</span><br><span class="line">  x: el.pageXOffset !== <span class="literal">undefined</span> ? el.pageXOffset : el.scrollLeft,</span><br><span class="line">  y: el.pageYOffset !== <span class="literal">undefined</span> ? el.pageYOffset : el.scrollTop</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// getScrollPos() -&gt; &#123;x: 0, y: 200&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a><strong>最大公约数</strong></h1><p>使用递归。基本情况是当 y 等于 0 时。在这种情况下，返回 x。否则，返回 y 和 x/y 的 GCD。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gcd = <span class="function">(<span class="params">x, y</span>) =&gt;</span> (!y ? x : gcd(y, x % y));</span><br><span class="line"><span class="comment">// gcd (8, 36) -&gt; 4</span></span><br></pre></td></tr></table></figure>
+<h1 id="list-初始化"><a href="#list-初始化" class="headerlink" title="list 初始化"></a><strong>list 初始化</strong></h1><p>返回 arr.slice(0，-1)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initial = <span class="function">(<span class="params">arr</span>) =&gt;</span> arr.slice(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line"><span class="comment">// initial([1,2,3]) -&gt; [1,2]</span></span><br></pre></td></tr></table></figure>
+<h1 id="测试功能所花费的时间"><a href="#测试功能所花费的时间" class="headerlink" title="测试功能所花费的时间"></a><strong>测试功能所花费的时间</strong></h1><p>使用 performance.now()获取函数的开始和结束时间，console.log()所花费的时间。第一个参数是函数名，随后的参数传递给函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeTaken = <span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.time(<span class="string">'timeTaken'</span>);</span><br><span class="line">  <span class="keyword">const</span> r = callback();</span><br><span class="line">  <span class="built_in">console</span>.timeEnd(<span class="string">'timeTaken'</span>);</span><br><span class="line">  <span class="keyword">return</span> r;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// timeTaken(() =&gt; Math.pow(2, 10)) -&gt; 1024</span></span><br><span class="line"><span class="comment">// (logged): timeTaken: 0.02099609375ms</span></span><br></pre></td></tr></table></figure>
+<h1 id="来自键值对的对象"><a href="#来自键值对的对象" class="headerlink" title="来自键值对的对象"></a><strong>来自键值对的对象</strong></h1><p>使用 Array.reduce()来创建和组合键值对。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objectFromPairs = <span class="function">(<span class="params">arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> ((a[v[<span class="number">0</span>]] = v[<span class="number">1</span>]), a), &#123;&#125;);</span><br><span class="line"><span class="comment">// objectFromPairs([['a',1],['b',2]]) -&gt; &#123;a: 1, b: 2&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="Powerset"><a href="#Powerset" class="headerlink" title="Powerset"></a><strong>Powerset</strong></h1><p>使用 reduce()与 map()结合来遍历元素，并将其组合成包含所有组合的数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> powerset = <span class="function">(<span class="params">arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> a.concat(a.map(<span class="function">(<span class="params">r</span>) =&gt;</span> r.concat([v]))), [[]]);</span><br><span class="line"><span class="comment">// powerset([1,2]) -&gt; [[], [1], [2], [1,2]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> powerset = <span class="function">(<span class="params">arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> [...a, ...a.map(<span class="function">(<span class="params">r</span>) =&gt;</span> r.concat([v]))], [[]]);</span><br></pre></td></tr></table></figure>
+<h1 id="范围内的随机整数"><a href="#范围内的随机整数" class="headerlink" title="范围内的随机整数"></a><strong>范围内的随机整数</strong></h1><p>使用 Math.random()生成一个随机数并将其映射到所需的范围，使用 Math.floor()使其成为一个整数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomIntegerInRange = <span class="function">(<span class="params">min, max</span>) =&gt;</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>)) + min;</span><br><span class="line"><span class="comment">// randomIntegerInRange(0, 5) -&gt; 2</span></span><br></pre></td></tr></table></figure>
+<h1 id="反转一个字符串"><a href="#反转一个字符串" class="headerlink" title="反转一个字符串"></a><strong>反转一个字符串</strong></h1><p>使用数组解构和 Array.reverse()来颠倒字符串中的字符顺序。合并字符以使用 join(‘’)获取字符串。[…str]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reverseString = <span class="function">(<span class="params">str</span>) =&gt;</span> [...str].reverse().join(<span class="string">''</span>);</span><br><span class="line"><span class="comment">// reverseString('foobar') -&gt; 'raboof'</span></span><br></pre></td></tr></table></figure>
+<h1 id="RGB-到十六进制"><a href="#RGB-到十六进制" class="headerlink" title="RGB 到十六进制"></a><strong>RGB 到十六进制</strong></h1><p>使用按位左移运算符(&lt;&lt;)和 toString(16)，然后 padStart(6，“0”)将给定的 RGB 参数转换为十六进制字符串以获得 6 位十六进制值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> rgbToHex = <span class="function">(<span class="params">r, g, b</span>) =&gt;</span> ((r &lt;&lt; <span class="number">16</span>) + (g &lt;&lt; <span class="number">8</span>) + b).toString(<span class="number">16</span>).padStart(<span class="number">6</span>, <span class="string">'0'</span>);</span><br><span class="line"><span class="comment">// rgbToHex(255, 165, 1) -&gt; 'ffa501'</span></span><br></pre></td></tr></table></figure>
+<h1 id="滚动到顶部"><a href="#滚动到顶部" class="headerlink" title="滚动到顶部"></a><strong>滚动到顶部</strong></h1><p>使用 document.documentElement.scrollTop 或 document.body.scrollTop 获取到顶部的距离。从顶部滚动一小部分距离。使用 window.requestAnimationFrame（）来滚动。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scrollToTop = <span class="function">(<span class="params">_</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> c = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">  <span class="keyword">if</span> (c &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.requestAnimationFrame(scrollToTop);</span><br><span class="line">    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, c - c / <span class="number">8</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// scrollToTop()</span></span><br></pre></td></tr></table></figure>
+<h1 id="按字符串排序（按字母顺序排列）"><a href="#按字符串排序（按字母顺序排列）" class="headerlink" title="按字符串排序（按字母顺序排列）"></a><strong>按字符串排序（按字母顺序排列）</strong></h1><p>使用 split(“)分割字符串，sort()使用 localeCompare()，使用 join(“)重新组合。<br>localeCompare()用本地特定的顺序来比较两个字符串。sort()根据 unicode 排序，2 在 10 后面。这里省略(a, b) =&gt; a.localeCompare(b)也可以</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortCharactersInString = <span class="function">(<span class="params">str</span>) =&gt;</span></span><br><span class="line">  str</span><br><span class="line">    .split(<span class="string">''</span>)</span><br><span class="line">    .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.localeCompare(b))</span><br><span class="line">    .join(<span class="string">''</span>);</span><br><span class="line"><span class="comment">// sortCharactersInString('cabbage') -&gt; 'aabbceg'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sortCharactersInString = <span class="function">(<span class="params">str</span>) =&gt;</span> [...str].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.localeCompare(b)).join(<span class="string">''</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="获取-URL-参数"><a href="#获取-URL-参数" class="headerlink" title="获取 URL 参数"></a><strong>获取 URL 参数</strong></h1><p>使用 match() 与适当的正则表达式来获得所有键值对，适当的 map() 。使用 Object.assign()和 spread 运算符(…)将所有键值对组合到一个对象中，将 location.search 作为参数传递给当前 url。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getUrlParameters = <span class="function">(<span class="params">url</span>) =&gt;</span></span><br><span class="line">  url.match(<span class="regexp">/([^?=&amp;]+)(=([^&amp;]*))/g</span>).reduce(</span><br><span class="line">    <span class="comment">//["name=Adam", "surname=Smith"]</span></span><br><span class="line">    (a, v) =&gt; ((a[v.slice(<span class="number">0</span>, v.indexOf(<span class="string">'='</span>))] = v.slice(v.indexOf(<span class="string">'='</span>) + <span class="number">1</span>)), a),</span><br><span class="line">    &#123;&#125;</span><br><span class="line">  );</span><br><span class="line"><span class="comment">// getUrlParameters('http://url.com/page?name=Adam&amp;surname=Smith') -&gt; &#123;name: 'Adam', surname: 'Smith'&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="UUID-生成器"><a href="#UUID-生成器" class="headerlink" title="UUID 生成器"></a><strong>UUID 生成器</strong></h1><p>使用 crypto API 生成符合 RFC4122 版本 4 的 UUID。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> uuid = <span class="function">(<span class="params">_</span>) =&gt;</span></span><br><span class="line">  ([<span class="number">1e7</span>] + <span class="number">-1e3</span> + <span class="number">-4e3</span> + <span class="number">-8e3</span> + <span class="number">-1e11</span>).replace(<span class="regexp">/[018]/g</span>, (c) =&gt;</span><br><span class="line">    (c ^ (crypto.getRandomValues(<span class="keyword">new</span> <span class="built_in">Uint8Array</span>(<span class="number">1</span>))[<span class="number">0</span>] &amp; (<span class="number">15</span> &gt;&gt; (c / <span class="number">4</span>)))).toString(<span class="number">16</span>)</span><br><span class="line">  );</span><br><span class="line"><span class="comment">// uuid() -&gt; '7982fcfe-5721-4632-bede-6000885be57d'</span></span><br></pre></td></tr></table></figure>
+<h1 id="验证数字"><a href="#验证数字" class="headerlink" title="验证数字"></a><strong>验证数字</strong></h1><p>使用！isNaN 和 parseFloat()来检查参数是否是一个数字，使用 isFinite()来检查数字是否是有限的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> validateNumber = <span class="function">(<span class="params">n</span>) =&gt;</span> !<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(n)) &amp;&amp; <span class="built_in">isFinite</span>(n) &amp;&amp; <span class="built_in">Number</span>(n) == n;</span><br><span class="line"><span class="comment">// validateNumber('10') -&gt; true</span></span><br></pre></td></tr></table></figure>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Javascript/">Javascript</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/post/282ddb18.html">
+        <span class="next-text nav-default">30S读懂的js代码之Aarry</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    owner: 'yoyooyooo',
+    repo: 'yoyooyooo.github.io',
+    oauth: {
+      client_id: '72a814ddc6eb790d7a5d',
+      client_secret: 'aa442e96984dcbd425a8131c825cc33f437d7c29',
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2018
+    <span class="footer-author">yoyo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
