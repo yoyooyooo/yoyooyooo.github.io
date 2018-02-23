@@ -35,17 +35,17 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/282ddb18.html"/>
 
 
-<meta name="description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数使用reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / ar">
+<meta name="description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / arr.">
 <meta name="keywords" content="Javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="30S读懂的js代码之Aarry">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/282ddb18.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数使用reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / ar">
-<meta property="og:updated_time" content="2018-02-23T16:00:55.788Z">
+<meta property="og:description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / arr.">
+<meta property="og:updated_time" content="2018-02-23T16:51:30.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30S读懂的js代码之Aarry">
-<meta name="twitter:description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数使用reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / ar">
+<meta name="twitter:description" content="一些实用的例子，大多来自30-seconds-of-code。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = (arr) =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / arr.">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -132,7 +132,7 @@
             <blockquote>
 <p>一些实用的例子，大多来自<a href="https://github.com/Chalarangelo/30-seconds-of-code" target="_blank" rel="noopener">30-seconds-of-code</a>。主要用了 ES6 语法的 map，filter，reduce 等高阶函数，函数式写法，代码优雅</p>
 </blockquote>
-<h1 id="数组平均数使用"><a href="#数组平均数使用" class="headerlink" title="数组平均数使用"></a><strong>数组平均数使用</strong></h1><p>reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。</p>
+<h1 id="数组平均数"><a href="#数组平均数" class="headerlink" title="数组平均数"></a><strong>数组平均数</strong></h1><p>reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> average = <span class="function">(<span class="params">arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">acc, val</span>) =&gt;</span> acc + val, <span class="number">0</span>) / arr.length;</span><br><span class="line">average([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
 <h1 id="计算数组中值出现的次数"><a href="#计算数组中值出现的次数" class="headerlink" title="计算数组中值出现的次数"></a><strong>计算数组中值出现的次数</strong></h1><p>最后的一个逗号后面的 0，是这个初始值，即 a=0，这个懂 reduce 方法都知道，特别指出是，因为这个函数一定会有返回值，如果指定元素没有在数组中出现一次，返回值是 0，所以必须得初始化为 0。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> countOccurrences = <span class="function">(<span class="params">arr, value</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> (v === value ? a + <span class="number">1</span> : a + <span class="number">0</span>), <span class="number">0</span>);</span><br><span class="line"><span class="comment">//countOccurrences([1,1,2,1,2,3], 1) -&gt; 3</span></span><br></pre></td></tr></table></figure>
@@ -192,13 +192,13 @@
       <a class="prev" href="/post/d88ffb6f.html">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">30S读懂的js代码之杂</span>
-        <span class="prev-text nav-mobile">上一篇</span>
+        <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
       <a class="next" href="/post/a66fee9d.html">
         <span class="next-text nav-default">redux文档整理(一)</span>
-        <span class="prev-text nav-mobile">下一篇</span>
+        <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>
     
@@ -243,7 +243,7 @@
     2018
     <span class="footer-author">yoyo.</span>
     <span class="power-by">
-        由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a> 强力驱动
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
     </span>
 </span>
 
