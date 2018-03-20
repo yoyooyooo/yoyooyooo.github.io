@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://yoyooyooo.github.io/post/bc04b032.html">
 <meta property="og:site_name" content="yooo">
 <meta property="og:description" content="一些实用的例子，大多来自 30-seconds-of-code。主要用了 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = arr =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / arr.length;av">
-<meta property="og:updated_time" content="2018-03-13T14:48:33.887Z">
+<meta property="og:updated_time" content="2018-03-20T15:08:03.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js实用函数之array">
 <meta name="twitter:description" content="一些实用的例子，大多来自 30-seconds-of-code。主要用了 map，filter，reduce 等高阶函数，函数式写法，代码优雅  数组平均数reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。 12const average = arr =&amp;gt; arr.reduce((acc, val) =&amp;gt; acc + val, 0) / arr.length;av">
@@ -130,7 +130,7 @@
     
             <div class="post-content">
             <blockquote>
-<p>一些实用的例子，大多来自 30-seconds-of-code。主要用了 map，filter，reduce 等高阶函数，函数式写法，代码优雅</p>
+<p>一些实用的例子，大多来自 <a href="https://github.com/Chalarangelo/30-seconds-of-code" target="_blank" rel="noopener">30-seconds-of-code</a>。主要用了 map，filter，reduce 等高阶函数，函数式写法，代码优雅</p>
 </blockquote>
 <h1 id="数组平均数"><a href="#数组平均数" class="headerlink" title="数组平均数"></a><strong>数组平均数</strong></h1><p>reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> average = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">acc, val</span>) =&gt;</span> acc + val, <span class="number">0</span>) / arr.length;</span><br><span class="line">average([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
@@ -154,7 +154,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initializeArray = <span class="function">(<span class="params">n, value = <span class="number">0</span></span>) =&gt;</span> <span class="built_in">Array</span>(n).fill(value);</span><br><span class="line"><span class="comment">// initializeArray(5, 2) -&gt; [2,2,2,2,2]</span></span><br></pre></td></tr></table></figure>
 <h1 id="获取数组的最后一个值"><a href="#获取数组的最后一个值" class="headerlink" title="获取数组的最后一个值"></a><strong>获取数组的最后一个值</strong></h1><p>返回 arr.slice(-1)[0]，arr.slice(begin,end)，弱参数为负数，从倒数第几个元素开始取。获取出来的是数组，加个[0]是取出数，[3][0]=3</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> last = <span class="function"><span class="params">arr</span> =&gt;</span> arr.slice(<span class="number">-1</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">// last([1,2,3]) -&gt; 3</span></span><br></pre></td></tr></table></figure>
-<h1 id="随机化数组的顺序"><a href="#随机化数组的顺序" class="headerlink" title="随机化数组的顺序"></a><strong>随机化数组的顺序</strong></h1><p>使用 sort()重新排序元素，利用 Math.random()来随机排序。</p>
+<h1 id="随机化数组的顺序"><a href="#随机化数组的顺序" class="headerlink" title="随机化数组的顺序"></a><strong>随机化数组的顺序</strong></h1><p>使用 sort()重新排序元素，利用 Math.random()来随机排序。(不是完全随机，具体参考<a href="https://blog.oldj.net/2017/01/23/shuffle-an-array-in-javascript/" target="_blank" rel="noopener">shuffle-an-array-in-javascript</a>)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shuffle = <span class="function"><span class="params">arr</span> =&gt;</span> arr.sort(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Math</span>.random() - <span class="number">0.5</span>);</span><br><span class="line"><span class="comment">// shuffle([1,2,3]) -&gt; [2,3,1]</span></span><br></pre></td></tr></table></figure>
 <h1 id="数组之间的相似性"><a href="#数组之间的相似性" class="headerlink" title="数组之间的相似性"></a><strong>数组之间的相似性</strong></h1><p>使用 filter()移除不是 values 的一部分值，使用 includes()确定。arr 传给 v</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> similarity = <span class="function">(<span class="params">arr, values</span>) =&gt;</span> arr.filter(<span class="function"><span class="params">v</span> =&gt;</span> values.includes(v));</span><br><span class="line"><span class="comment">// similarity([1,2,3], [1,2,4]) -&gt; [1,2]</span></span><br></pre></td></tr></table></figure>
