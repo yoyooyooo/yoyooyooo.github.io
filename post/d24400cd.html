@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="react-motion笔记"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="yooo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myfavicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://yoyooyooo.github.io/post/d24400cd.html"/>
+
+
+<meta name="description" content="一般写法：123&amp;lt;Motion defaultStyle=&amp;#123;&amp;#123; left: 0 &amp;#125;&amp;#125; style=&amp;#123;&amp;#123; left: spring(10) &amp;#125;&amp;#125;&amp;gt;  &amp;#123;interpolatingStyle =&amp;gt; &amp;lt;div style=&amp;#123;interpolatingStyle&amp;#125; /&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-motion笔记">
+<meta property="og:url" content="https://yoyooyooo.github.io/post/d24400cd.html">
+<meta property="og:site_name" content="yooo">
+<meta property="og:description" content="一般写法：123&amp;lt;Motion defaultStyle=&amp;#123;&amp;#123; left: 0 &amp;#125;&amp;#125; style=&amp;#123;&amp;#123; left: spring(10) &amp;#125;&amp;#125;&amp;gt;  &amp;#123;interpolatingStyle =&amp;gt; &amp;lt;div style=&amp;#123;interpolatingStyle&amp;#125; /&amp;gt">
+<meta property="og:updated_time" content="2018-03-27T14:48:50.245Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-motion笔记">
+<meta name="twitter:description" content="一般写法：123&amp;lt;Motion defaultStyle=&amp;#123;&amp;#123; left: 0 &amp;#125;&amp;#125; style=&amp;#123;&amp;#123; left: spring(10) &amp;#125;&amp;#125;&amp;gt;  &amp;#123;interpolatingStyle =&amp;gt; &amp;lt;div style=&amp;#123;interpolatingStyle&amp;#125; /&amp;gt">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> react-motion笔记 - yooo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">yooo</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          react-motion笔记
+        
+      </h1>
+
+      <time class="post-time">
+          Feb 27 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="一般写法："><a href="#一般写法：" class="headerlink" title="一般写法："></a><strong>一般写法：</strong></h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Motion defaultStyle=&#123;&#123; <span class="attr">left</span>: <span class="number">0</span> &#125;&#125; style=&#123;&#123; <span class="attr">left</span>: spring(<span class="number">10</span>) &#125;&#125;&gt;</span><br><span class="line">  &#123;interpolatingStyle =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;interpolatingStyle&#125;</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">Motion</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>指定一个初始 style(defaultStyle)，然后赋值一个目标 style(style)，中间每帧都会由 react-motion 计算出对应的 style，用户只管使用生成的 style(interpolatingStyle)，不用关心物理效果的实现，动画中断的处理</p>
+<h1 id="spring"><a href="#spring" class="headerlink" title="spring"></a><strong>spring</strong></h1><p>spring(val,config)，config 里包含 stiffness、damping 和 precision。如 spring(10, {stiffness: 120, damping: 17})<br>把我们要设置动画的物体想象成弹簧</p>
+<ul>
+<li>val：终点值，即你希望达到的最后状态的数值，number 类型</li>
+<li>config：可选。用于生成物理效果的配置<ul>
+<li>stiffness：相当于弹簧的强度，其影响的是弹簧回弹的速度，stiffness 越大，回弹速度越快</li>
+<li>damping：弹簧的减震性，其影响的是弹簧的回弹次数，damping 越大，回弹次数越少 3. precision：用于配置 val 的精确度，一般用默认的 0.01 就行</li>
+</ul>
+</li>
+</ul>
+<p>{stiffness, damping}可以设置预设值，<a href="https://github.com/chenglou/react-motion/blob/9cb90eca20ecf56e77feb816d101a4a9110c7d70/src/presets.js" target="_blank" rel="noopener">Presets</a> = {stiffness, damping}。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">presets = &#123;</span><br><span class="line">  noWobble: &#123; <span class="attr">stiffness</span>: <span class="number">170</span>, <span class="attr">damping</span>: <span class="number">26</span> &#125;, <span class="comment">// the default, if nothing provided</span></span><br><span class="line">  gentle: &#123; <span class="attr">stiffness</span>: <span class="number">120</span>, <span class="attr">damping</span>: <span class="number">14</span> &#125;,</span><br><span class="line">  wobbly: &#123; <span class="attr">stiffness</span>: <span class="number">180</span>, <span class="attr">damping</span>: <span class="number">12</span> &#125;,</span><br><span class="line">  stiff: &#123; <span class="attr">stiffness</span>: <span class="number">210</span>, <span class="attr">damping</span>: <span class="number">20</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; presets &#125; <span class="keyword">from</span> <span class="string">"react-motion"</span>;</span><br><span class="line">&lt;Motion defaultStyle=&#123;&#123; <span class="attr">left</span>: <span class="number">0</span> &#125;&#125; style=&#123;&#123; <span class="attr">left</span>: spring(<span class="number">10</span>, presets.wobbly) &#125;&#125;&gt;</span><br><span class="line">  &#123;interpolatingStyle =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;interpolatingStyle&#125;</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">Motion</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="Motion"><a href="#Motion" class="headerlink" title="Motion"></a><strong>Motion</strong></h1><p>该动画组件内部往往只有一个直接子组件，也就是只有一个动画目标。</p>
+<h2 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a>基本用法：</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Motion</span><br><span class="line">  defaultStyle=&#123;&#123;<span class="attr">x</span>: <span class="number">0</span>&#125;&#125;</span><br><span class="line">  style=&#123;&#123;<span class="attr">x</span>: spring(<span class="number">10</span>)&#125;&#125;</span><br><span class="line">    onRest=&#123;() =&gt; <span class="keyword">void</span>&#125;&gt;</span><br><span class="line">  &#123;</span><br><span class="line">  interpolatingStyle =&gt; (</span><br><span class="line">      &lt;div style=&#123;interpolatingStyle&#125;&gt;&#123;interpolatingStyle.x&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>Motion&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>defaultStyle?: PlainStyle，可选参数，PlainStyle 指的就是 React 常用作行内样式的对象类型的 { width: ‘10px’, height: ‘10px’ }，见名知意，为动画设定初始值</li>
+<li>style: Style，必选参数，指定动画完成的目标值，并设定动画的变化类型，实际上是一种数据驱动的形式</li>
+<li>onRest?: () =&gt; void，可选参数，在动画完成后调用</li>
+<li>children: (interpolatedStyle: PlainStyle) =&gt; ReactElement，必选函数，接收一个从初始值到目标值中间的值，这个值不断变化，用于渲染子组件的样式</li>
+</ul>
+<iframe src="https://codesandbox.io/embed/91lo67mony" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<h1 id="StaggeredMotion"><a href="#StaggeredMotion" class="headerlink" title="StaggeredMotion"></a><strong>StaggeredMotion</strong></h1><p>该动画组件内部有一个或多个直接子组件，多个子组件之间的动画效果有关联性。</p>
+<iframe src="https://codesandbox.io/embed/vvylxvkqjy" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<h1 id="TransitionMotion"><a href="#TransitionMotion" class="headerlink" title="TransitionMotion"></a><strong>TransitionMotion</strong></h1><p>该动画组件内部的一个或多个组件可以卸载或挂载，提供 Enter 和 Leave 动画效果。</p>
+<iframe src="https://codesandbox.io/embed/r74l9p487q" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/post/48f6d798.html">
+        <span class="next-text nav-default">实用css片段</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    owner: 'yoyooyooo',
+    repo: 'yoyooyooo.github.io',
+    oauth: {
+      client_id: '72a814ddc6eb790d7a5d',
+      client_secret: 'aa442e96984dcbd425a8131c825cc33f437d7c29',
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2018
+    <span class="footer-author">yoyo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
