@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="rxjs笔记（1）"/>
+  <meta name="description" content="Rxjs笔记（1）"/>
 
 
 
@@ -38,13 +38,13 @@
 <meta name="description" content="https://stackblitz.com/edit/rx-1  一个例子，对比 jQuery 和 Rxjs 分别写的简单 demo。  jQuery 版本：startTime 变量在 2 个不痛的函数都有用到，一不小心就会引发 bug。代码看起来是一串指令。  Rxjs 版本：所有变量其实都没有“变”，赋值时是什么值，就一直保持这些值。代码是一个个函数，每个函数只是对输入的参数做了响应并返回">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rxjs笔记（1）">
+<meta property="og:title" content="Rxjs笔记（1）">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/5a5f75e5.html">
 <meta property="og:site_name" content="yooo">
 <meta property="og:description" content="https://stackblitz.com/edit/rx-1  一个例子，对比 jQuery 和 Rxjs 分别写的简单 demo。  jQuery 版本：startTime 变量在 2 个不痛的函数都有用到，一不小心就会引发 bug。代码看起来是一串指令。  Rxjs 版本：所有变量其实都没有“变”，赋值时是什么值，就一直保持这些值。代码是一个个函数，每个函数只是对输入的参数做了响应并返回">
-<meta property="og:updated_time" content="2018-05-14T13:56:41.930Z">
+<meta property="og:updated_time" content="2018-05-14T14:50:52.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rxjs笔记（1）">
+<meta name="twitter:title" content="Rxjs笔记（1）">
 <meta name="twitter:description" content="https://stackblitz.com/edit/rx-1  一个例子，对比 jQuery 和 Rxjs 分别写的简单 demo。  jQuery 版本：startTime 变量在 2 个不痛的函数都有用到，一不小心就会引发 bug。代码看起来是一串指令。  Rxjs 版本：所有变量其实都没有“变”，赋值时是什么值，就一直保持这些值。代码是一个个函数，每个函数只是对输入的参数做了响应并返回">
 
 
@@ -70,7 +70,7 @@
 
 
 
-    <title> rxjs笔记（1） - yooo </title>
+    <title> Rxjs笔记（1） - yooo </title>
   </head>
 
   <body>
@@ -116,7 +116,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          rxjs笔记（1）
+          Rxjs笔记（1）
         
       </h1>
 
@@ -144,12 +144,26 @@
 <li>函数式</li>
 <li>响应式</li>
 </ul>
-<h1 id="函数式"><a href="#函数式" class="headerlink" title="函数式"></a><strong>函数式</strong></h1><p><strong>命令式编程：</strong></p>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><strong>函数式编程</strong></h1><p><strong>命令式编程：强调“怎么去做”</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> results = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    results.push(arr[i] * <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(double([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]));</span><br></pre></td></tr></table></figure>
 <p>缺点：很容易写重复代码，比如上面例子，现在不是要每个 2 倍，而是 3 倍，那么就要把上面一大段复制来，把 2 改成 3</p>
-<p><strong>申明式编程：</strong></p>
+<p><strong>申明式编程：强调“想要做什么”</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(double([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]));</span><br></pre></td></tr></table></figure>
-<p>优点：for 被封装在 map 方法里，把一个数组映射成另一个数组，不需要再去写循环的重复代码，易读，易维护。而且不修改原数组，函数式编程另一个重要的特性：<strong>纯函数</strong></p>
+<p>优点：for 被封装在 map 方法里，把一个数组映射成另一个数组，不需要再去写循环的重复代码，易读，易维护。而且不修改原数组，函数式编程另一个重要的特性：<br><strong>纯函数</strong>:输入决定输出，函数不修改任何外部状态</p>
+<p><strong>面向对象与函数式编程</strong></p>
+<ul>
+<li>面向对象的思想是把数据封装在类的实例对象中，外部不能直接访问这些对象，只能通过类提供的实例方法来读取和修改。带来了一个天生缺陷：数据的修改历史被隐藏了，我们只能知道对象的当前状态，没法知道这个对象是如何一步步变为这个状态的。</li>
+<li>函数式编程倾向于数据就是数据，函数就是函数，函数可以处理数据，通过产生新的数据作为运算结果（纯函数）</li>
+</ul>
+<h1 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a><strong>响应式编程</strong></h1><p>一种通过异步和数据流来构建事物关系的编程模型。数据流只是事物之间沟通的桥梁，如 DOM 事件，通过 ajax 获得数据，网页动画显示等等都可以看作是一个数据流。特点：</p>
+<ul>
+<li>数据流抽象了很多现实问题</li>
+<li>擅长处理异步操作</li>
+<li>把复杂问题分解成简单问题的组合</li>
+</ul>
+<blockquote>
+<p>Rxjs 擅长处理异步操作，它对数据采用“推”的处理方式，当一个数据产生的时候，被推送给对应的处理函数，这个处理函数不用关心数据是同步还是异步产生的，把开发者从命令式异步处理的枷锁中解放出来。<br>Rxjs 中的数据流可能包含复杂的功能，但是可以分解成很多小的部分来实现，实现某个小功能的函数就是操作符，Rxjs 就是通过组合各种操作符来解决复杂问题。</p>
+</blockquote>
 
             </div>
           
