@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://yoyooyooo.github.io/post/5a5f75e5.html">
 <meta property="og:site_name" content="yooo">
 <meta property="og:description" content="https://stackblitz.com/edit/rx-1  一个例子，对比 jQuery 和 Rxjs 分别写的简单 demo。  jQuery 版本：startTime 变量在 2 个不痛的函数都有用到，一不小心就会引发 bug。代码看起来是一串指令。  Rxjs 版本：所有变量其实都没有“变”，赋值时是什么值，就一直保持这些值。代码是一个个函数，每个函数只是对输入的参数做了响应并返回">
-<meta property="og:updated_time" content="2018-05-14T14:50:52.675Z">
+<meta property="og:updated_time" content="2018-05-15T14:57:33.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjs笔记（1）">
 <meta name="twitter:description" content="https://stackblitz.com/edit/rx-1  一个例子，对比 jQuery 和 Rxjs 分别写的简单 demo。  jQuery 版本：startTime 变量在 2 个不痛的函数都有用到，一不小心就会引发 bug。代码看起来是一串指令。  Rxjs 版本：所有变量其实都没有“变”，赋值时是什么值，就一直保持这些值。代码是一个个函数，每个函数只是对输入的参数做了响应并返回">
@@ -164,6 +164,9 @@
 <blockquote>
 <p>Rxjs 擅长处理异步操作，它对数据采用“推”的处理方式，当一个数据产生的时候，被推送给对应的处理函数，这个处理函数不用关心数据是同步还是异步产生的，把开发者从命令式异步处理的枷锁中解放出来。<br>Rxjs 中的数据流可能包含复杂的功能，但是可以分解成很多小的部分来实现，实现某个小功能的函数就是操作符，Rxjs 就是通过组合各种操作符来解决复杂问题。</p>
 </blockquote>
+<blockquote>
+<p>部分代码来自<a href="https://github.com/mocheng/dissecting-rxjs" target="_blank" rel="noopener">https://github.com/mocheng/dissecting-rxjs</a></p>
+</blockquote>
 
             </div>
           
@@ -181,6 +184,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/post/666db4ec.html">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Rxjs笔记（2）</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/post/d24400cd.html">
