@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="Rxjs笔记（3）：创建类操作符"/>
+  <meta name="description" content="Rxjs笔记（4）：创建类操作符"/>
 
 
 
@@ -38,13 +38,13 @@
 <meta name="description" content="同步类create静态操作符，没什么花头，相当于 Observable 构造函数 123Observable.create = function(subscribe) &amp;#123;  return new Observable(subscribe);&amp;#125;; of静态操作符，创建已知数据流 1of(1, 2, 3); //1,2,3 range静态操作符，指定范围数据流 1range(1,">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rxjs笔记（3）：创建类操作符">
+<meta property="og:title" content="Rxjs笔记（4）：创建类操作符">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/8efe00ac.html">
 <meta property="og:site_name" content="yooo">
 <meta property="og:description" content="同步类create静态操作符，没什么花头，相当于 Observable 构造函数 123Observable.create = function(subscribe) &amp;#123;  return new Observable(subscribe);&amp;#125;; of静态操作符，创建已知数据流 1of(1, 2, 3); //1,2,3 range静态操作符，指定范围数据流 1range(1,">
-<meta property="og:updated_time" content="2018-05-25T16:02:40.015Z">
+<meta property="og:updated_time" content="2018-05-26T15:58:22.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rxjs笔记（3）：创建类操作符">
+<meta name="twitter:title" content="Rxjs笔记（4）：创建类操作符">
 <meta name="twitter:description" content="同步类create静态操作符，没什么花头，相当于 Observable 构造函数 123Observable.create = function(subscribe) &amp;#123;  return new Observable(subscribe);&amp;#125;; of静态操作符，创建已知数据流 1of(1, 2, 3); //1,2,3 range静态操作符，指定范围数据流 1range(1,">
 
 
@@ -70,7 +70,7 @@
 
 
 
-    <title> Rxjs笔记（3）：创建类操作符 - yooo </title>
+    <title> Rxjs笔记（4）：创建类操作符 - yooo </title>
   </head>
 
   <body>
@@ -116,12 +116,12 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Rxjs笔记（3）：创建类操作符
+          Rxjs笔记（4）：创建类操作符
         
       </h1>
 
       <time class="post-time">
-          May 25 2018
+          May 26 2018
       </time>
     </header>
 
@@ -129,21 +129,21 @@
 
     
             <div class="post-content">
-            <h1 id="同步类"><a href="#同步类" class="headerlink" title="同步类"></a><strong>同步类</strong></h1><p><strong>create</strong><br>静态操作符，没什么花头，相当于 Observable 构造函数</p>
+            <h1 id="同步类"><a href="#同步类" class="headerlink" title="同步类"></a><strong>同步类</strong></h1><h1 id="create"><a href="#create" class="headerlink" title="create"></a>create</h1><p>静态操作符，没什么花头，相当于 Observable 构造函数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Observable.create = <span class="function"><span class="keyword">function</span>(<span class="params">subscribe</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Observable(subscribe);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>of</strong><br>静态操作符，创建已知数据流</p>
+<h1 id="of"><a href="#of" class="headerlink" title="of"></a>of</h1><p>静态操作符，创建已知数据流</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">//1,2,3</span></span><br></pre></td></tr></table></figure>
-<p><strong>range</strong><br>静态操作符，指定范围数据流</p>
+<h1 id="range"><a href="#range" class="headerlink" title="range"></a>range</h1><p>静态操作符，指定范围数据流</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">range(<span class="number">1</span>, <span class="number">100</span>); <span class="comment">//1,2,3...100</span></span><br></pre></td></tr></table></figure>
-<p><strong>generate</strong><br>静态操作符，循环创建数据流<br>of 和 range 都有局限性，如果想产生一个比 10 小的所有偶数的平方，用 for 循环可以这样写：</p>
+<h1 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h1><p>静态操作符，循环创建数据流<br>of 和 range 都有局限性，如果想产生一个比 10 小的所有偶数的平方，用 for 循环可以这样写：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; <span class="number">10</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">  result.push(i * i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>用 generate:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ = Observable.generate(</span><br><span class="line">  <span class="number">2</span>,</span><br><span class="line">  val =&gt; val &lt; <span class="number">10</span>,</span><br><span class="line">  val =&gt; val + <span class="number">2</span>,</span><br><span class="line">  val =&gt; val * val</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>按顺序相当于 for 循环的 3 个参数+结果,第一个参数是一个值，后 3 个都是函数 s<br>generate 实现 range：</p>
+<p>按顺序相当于 for 循环的 3 个参数 + 结果,第一个参数是一个值，后 3 个都是函数<br>generate 实现 range：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> range = <span class="function">(<span class="params">start, end</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> max = start + end;</span><br><span class="line">  <span class="keyword">return</span> Observable.generate(</span><br><span class="line">    start,</span><br><span class="line">    val =&gt; val &lt; max,</span><br><span class="line">    val =&gt; val + <span class="number">1</span>,</span><br><span class="line">    val =&gt; val</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>*<em>generate 还能产生不是数字的数据，如字符串</em>：*</p>
+<p><strong>generate 还能产生不是数字的数据，如字符串：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ = Observable.generate(</span><br><span class="line">  <span class="string">"x"</span>,</span><br><span class="line">  val =&gt; val.length &lt; <span class="number">10</span>,</span><br><span class="line">  val =&gt; val + <span class="string">"a"</span>,</span><br><span class="line">  val =&gt; val</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p><strong>repeat</strong><br>实例操作符，重复数据流，重复上游数据若干次，产生一个全新 Observable 对象，效果是重复订阅/取消订阅若干次上游数据流<br><strong>注意事项：</strong>repeat 只有在上游 Observable 对象完结之后才会重新订阅，也就是说如果上游永不完结，repeat 也就不会生效</p>
+<h1 id="repeat"><a href="#repeat" class="headerlink" title="repeat"></a>repeat</h1><p>实例操作符，重复数据流，重复上游数据若干次，产生一个全新 Observable 对象，效果是重复订阅/取消订阅若干次上游数据流<br><strong>注意事项：</strong>repeat 只有在上游 Observable 对象完结之后才会重新订阅，也就是说如果上游永不完结，repeat 也就不会生效</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) |&gt; repeat(<span class="number">3</span>); <span class="comment">//1,2,3,1,2,3,1,2,3</span></span><br></pre></td></tr></table></figure>
 <p><strong>empty/throwError/never</strong></p>
 <ul>
@@ -151,16 +151,18 @@
 <li>throwError：静态操作符，产生一个<em>直接出错</em>的 Observable 对象。用法：throwError(new Error(“出错了”))</li>
 <li>never：静态操作符，<em>什么都不做</em>。不完结，不出错，不吐数据，直到永远。用法：throwError(new Error(“出错了”))</li>
 </ul>
-<h1 id="异步类"><a href="#异步类" class="headerlink" title="异步类"></a><strong>异步类</strong></h1><p><strong>interval</strong><br>静态操作符，定时产生永不完结的数据流，从 0 开始，间隔 1。接受一个参数，为时间间隔。如果要产生其他数据，可以配合 map 使用<br><strong>timer</strong><br>静态操作符，一定时间后吐出一个 0，然后立即完结。接收一个参数，可以是数值也可以是 Date 对象，如果是数值代表毫秒数，如果是 Data 对象代表。还可以接收第二个参数，如果有第二个参数，会持续吐出数据，第二个参数代表时间间隔。<code>timer(1000,1000)</code>和<code>interval(1000)</code>完全一样。可以认为 interval 是 timer2 个参数相同时候的简写</p>
-<p><strong>from</strong><br>静态操作符，把一切转化为 Observable 对象。接收一个参数，只要“像”Observable 对象就行了，如数组、类数组对象、字符串、generator、Promise</p>
+<h1 id="异步类"><a href="#异步类" class="headerlink" title="异步类"></a><strong>异步类</strong></h1><h1 id="interval"><a href="#interval" class="headerlink" title="interval"></a>interval</h1><p>静态操作符，定时产生永不完结的数据流，从 0 开始，间隔 1。接受一个参数，为时间间隔。如果要产生其他数据，可以配合 map 使用</p>
+<h1 id="timer"><a href="#timer" class="headerlink" title="timer"></a>timer</h1><p>静态操作符，一定时间后吐出一个 0，然后立即完结。接收一个参数，可以是数值也可以是 Date 对象，如果是数值代表毫秒数，如果是 Data 对象代表。还可以接收第二个参数，如果有第二个参数，会持续吐出数据，第二个参数代表时间间隔。<code>timer(1000,1000)</code>和<code>interval(1000)</code>完全一样。可以认为 interval 是 timer2 个参数相同时候的简写</p>
+<h1 id="from"><a href="#from" class="headerlink" title="from"></a>from</h1><p>静态操作符，把一切转化为 Observable 对象。接收一个参数，只要“像”Observable 对象就行了，如数组、类数组对象、字符串、generator、Promise</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">yield</span> i;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> source$ = <span class="keyword">from</span>(test()); <span class="comment">//1,2,3,4,5</span></span><br></pre></td></tr></table></figure>
-<p><strong>fromEvent</strong><br>静态操作符。把 DOM 事件中的对象转化为 Observable 对象中的数据。(还可以从 Node.js 的 events 中获得数据).<em>fromEvent 产生的是 hot Observable,订阅之前的数据不会吐出来</em></p>
+<h1 id="fromEvent"><a href="#fromEvent" class="headerlink" title="fromEvent"></a>fromEvent</h1><p>静态操作符。把 DOM 事件中的对象转化为 Observable 对象中的数据。(还可以从 Node.js 的 events 中获得数据).<em>fromEvent 产生的是 hot Observable,订阅之前的数据不会吐出来</em></p>
 <p>简单例子：实现点击按钮数字+1</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> event$ = fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>);</span><br><span class="line">event$.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">"#text"</span>).innerHTML = count++;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><strong>fromEventPattern</strong><br>静态操作符。接收 2 个函数作为参数，分别对应 Observable 对象被订阅和被退订时的动作。</p>
-<p><strong>ajax</strong></p>
-<p><strong>repeatWhen</strong><br>实例操作符。反复订阅上游数据流，如希望在接收到上游完结事件的时候等待一段时间再重新订阅，这样的功能 repeat 无法实现.<br>repeatWhen 接收一个函数作为参数（一个特殊的 Observable 对象，后文再讨论），这个函数返回一个 Observable 对象，这个对象就是控制器，作用是控制 repeatWhen 何时订阅上游，当控制器吐出一个数据的时候，repeatWhen 就会<em>退订上游并重新订阅</em></p>
+<h1 id="fromEventPattern"><a href="#fromEventPattern" class="headerlink" title="fromEventPattern"></a>fromEventPattern</h1><p>静态操作符。接收 2 个函数作为参数，分别对应 Observable 对象被订阅和被退订时的动作。</p>
+<h1 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h1><p>异步请求获取数据，注意引用路径。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ajax &#125; <span class="keyword">from</span> <span class="string">"rxjs/ajax"</span>;</span><br><span class="line"><span class="keyword">const</span> source$ = fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>);</span><br><span class="line">source$.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  ajax(<span class="string">"xxx.xx"</span>).subscribe(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res.response));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="repeatWhen"><a href="#repeatWhen" class="headerlink" title="repeatWhen"></a>repeatWhen</h1><p>实例操作符。反复订阅上游数据流，如希望在接收到上游完结事件的时候等待一段时间再重新订阅，这样的功能 repeat 无法实现.<br>repeatWhen 接收一个函数作为参数（一个特殊的 Observable 对象，后文再讨论），这个函数返回一个 Observable 对象，这个对象就是控制器，作用是控制 repeatWhen 何时订阅上游，当控制器吐出一个数据的时候，repeatWhen 就会<em>退订上游并重新订阅</em></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) |&gt; repeatWhen(<span class="function"><span class="params">()</span> =&gt;</span> interval(<span class="number">1000</span>));</span><br><span class="line">source$.subscribe(<span class="built_in">console</span>.log); <span class="comment">//1,2,3,1,2,3,1,2,3...</span></span><br></pre></td></tr></table></figure>
 
             </div>
@@ -181,8 +183,8 @@
   <nav class="post-nav">
     
     
-      <a class="next" href="/post/666db4ec.html">
-        <span class="next-text nav-default">Rxjs笔记（2）</span>
+      <a class="next" href="/post/21d6f68.html">
+        <span class="next-text nav-default">Rxjs笔记（3）:操作符</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>
