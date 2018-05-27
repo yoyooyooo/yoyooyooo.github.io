@@ -35,19 +35,20 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/9348d7be.html"/>
 
 
-<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
+<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLatestFrom   从多个数据流中选取第一个产生内容的数据流">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rxjs笔记（5）：合并类操作符">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/9348d7be.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
-<meta property="og:image" content="https://yoyooyooo.github.io/post/p4yaly36s.bkt.clouddn.com/201805272153_889.png">
-<meta property="og:updated_time" content="2018-05-27T13:54:07.697Z">
+<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLatestFrom   从多个数据流中选取第一个产生内容的数据流">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805272209_690.png">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805272305_770.png">
+<meta property="og:updated_time" content="2018-05-27T15:34:46.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjs笔记（5）：合并类操作符">
-<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
-<meta name="twitter:image" content="https://yoyooyooo.github.io/post/p4yaly36s.bkt.clouddn.com/201805272153_889.png">
+<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLatestFrom   从多个数据流中选取第一个产生内容的数据流">
+<meta name="twitter:image" content="http://p4yaly36s.bkt.clouddn.com/201805272209_690.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -153,19 +154,19 @@
 </tr>
 <tr>
 <td style="text-align:left">持续合并多个数据流中最新产生的数据</td>
-<td style="text-align:left"><a href="combineLastest">combineLastest</a>、combineAll 和 withLastestFrom</td>
+<td style="text-align:left"><a href="#combineLastest">combineLastest</a>、combineAll 和 <a href="#withLatestFrom">withLatestFrom</a></td>
 </tr>
 <tr>
 <td style="text-align:left">从多个数据流中选取第一个产生内容的数据流</td>
-<td style="text-align:left">race</td>
+<td style="text-align:left"><a href="#race">race</a></td>
 </tr>
 <tr>
 <td style="text-align:left">在数据流前面添加一个指定数据</td>
-<td style="text-align:left">startWith</td>
+<td style="text-align:left"><a href="#startWith">startWith</a></td>
 </tr>
 <tr>
 <td style="text-align:left">只获取多个数据流最后产生的那个数据</td>
-<td style="text-align:left">forkJoin</td>
+<td style="text-align:left"><a href="#forkJoin">forkJoin</a></td>
 </tr>
 <tr>
 <td style="text-align:left">从高阶数据流中切换数据源</td>
@@ -173,12 +174,12 @@
 </tr>
 </tbody>
 </table>
-<h1 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h1><p>即有静态操作符也有实例操作符。<strong>首尾相连依次</strong>合并多条数据流。作为静态操作符时可以接收任意个参数，从第一个数据流开始，前一个 Observable 完结后，订阅下一个 Observable。如果某一个 Observable 永不完结，则后面的数据流永远没机会上场。</p>
+<h1 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h1><p>既有静态操作符也有实例操作符。<strong>首尾相连依次</strong>合并多条数据流。作为静态操作符时可以接收任意个参数，从第一个数据流开始，前一个 Observable 完结后，订阅下一个 Observable。如果某一个 Observable 永不完结，则后面的数据流永远没机会上场。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态操作符</span></span><br><span class="line"><span class="keyword">import</span> &#123; concat &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line">constsource1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">constsource2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line">constsource$ = concat(source1$, source2$); <span class="comment">//123456</span></span><br><span class="line"><span class="comment">//实例操作符</span></span><br><span class="line"><span class="keyword">import</span> &#123; concat &#125; <span class="keyword">from</span> <span class="string">"rxjs/operators"</span>;</span><br><span class="line">constsource1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">constsource2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line">constsource$ = source1$ |&gt; concat(source2$); <span class="comment">//123456</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>注意引用路径不同</strong>,如果一个 js 里要同时用 2 种 cancat，可以 import 的时候用 as 改名以示区分，如静态操作符改成大写开头：<code>import{concatasConcat}from&quot;rxjs&quot;</code></p>
 </blockquote>
-<h1 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h1><p>即有静态操作符也有实例操作符。先到先得。第一时间订阅所有数据流，然后对上游数据采取“先到先得”策略，任何一个 Observable 只要有数据推下来，就会立刻转给下游 Observable，merge 只有在所有上游数据都完结后才会完结自己产生的 Observable 对象。(<strong>如果 2 个数据同时生成，先订阅的数据流会先吐数据</strong>)<br><strong>merge 一般用来合并异步数据</strong>，如果合并同步数据，它是依次订阅所有上游数据的，也就是说当它订阅了第一个数据流后还没来得及订阅第二个数据流，就把数据全吐出来了</p>
+<h1 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h1><p>既有静态操作符也有实例操作符。先到先得。第一时间订阅所有数据流，然后对上游数据采取“先到先得”策略，任何一个 Observable 只要有数据推下来，就会立刻转给下游 Observable，merge 只有在所有上游数据都完结后才会完结自己产生的 Observable 对象。(<strong>如果 2 个数据同时生成，先订阅的数据流会先吐数据</strong>)<br><strong>merge 一般用来合并异步数据</strong>，如果合并同步数据，它是依次订阅所有上游数据的，也就是说当它订阅了第一个数据流后还没来得及订阅第二个数据流，就把数据全吐出来了</p>
 <ul>
 <li>数据汇流</li>
 </ul>
@@ -191,7 +192,7 @@
 </li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; merge &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line">constclick$ = fromEvent(elememt, <span class="string">"click"</span>);</span><br><span class="line">consttouchend$ = fromEvent(elememt, <span class="string">"touchend"</span>);</span><br><span class="line">merge(click$, touchend$).subscribe(eventHandler);</span><br></pre></td></tr></table></figure>
-<h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><p>即有静态操作符也有实例操作符。<strong>一一对应</strong>合并数据流，就像拉链一样，吐出的数据会转化为数组的形式。<br>当zip开始合并时，会立刻订阅上游所有数据流，zip完结后会退订上游所有数据流。</p>
+<h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><p>既有静态操作符也有实例操作符。<strong>一一对应</strong>合并数据流，就像拉链一样，吐出的数据会转化为数组的形式。<br>当zip开始合并时，会立刻订阅上游所有数据流，zip完结后会退订上游所有数据流。</p>
 <ul>
 <li><p>一对一合并<br><strong>注意：</strong>如果其中一条数据流是异步的，其他数据流会等待他吐出数据，严格遵守“一一对应”原则。<br>只要合并的其中任何一条数据流完结了，zip合并生成的Observable对象会在最后一次合并完成后完结。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;zip <span class="keyword">as</span> Zip&#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = Zip(source1$, source2$);<span class="comment">//[1,"a"] [2,"b"] [3,"c"]</span></span><br></pre></td></tr></table></figure>
@@ -201,7 +202,31 @@
 <li><p>zip多个数据流<br>zip合并多条数据流时，数据最少的那条数据流决定zip产生的数据个数</p>
 </li>
 </ul>
-<h1 id="combineLastest"><a href="#combineLastest" class="headerlink" title="combineLastest"></a>combineLastest</h1><p>即有静态操作符也有实例操作符。合并最后一个数据<br><img src="p4yaly36s.bkt.clouddn.com/201805272153_889.png" alt="1"></p>
+<h1 id="combineLastest"><a href="#combineLastest" class="headerlink" title="combineLastest"></a>combineLastest</h1><p>既有静态操作符也有实例操作符。合并最后一个数据(最新数据)，只要有一条数据流的数据更新了就会吐出最新数据,所有数据流完结后，combineLastest才会给下游完结信号，表示不会有任何数据更新了。</p>
+<ul>
+<li>如果合并的数据流都是异步的，弹珠图如下：<br><img src="http://p4yaly36s.bkt.clouddn.com/201805272209_690.png" alt=""></li>
+<li><p>如果都是同步的，和merge、zip类似，combineLastest是按顺序依次一口气订阅所有数据流的，但是同步数据流在 <strong>刚订阅的时候就直接吐出所有数据</strong> 了，所以最后一跳数据流之前的同步数据流都直接是 <strong>最新数据</strong>。例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;combineLastest <span class="keyword">as</span> CombineLastest&#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = CombineLastest(source1$, source2$);<span class="comment">//[3,4] [3,5] [3,6]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定制下游数据<br>combineLastest的最后一个参数可以是一个函数（可选），称之为project，作用是吧所有上游的“最新数据”扔给下游之前做一下组合处理，这样可以不用传递一个数组，而是任何由“最新数据”产生的对象或者其他自定义结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = CombineLastest(source1$, source2$, (x, y) =&gt; (&#123; x, y &#125;));<span class="comment">//&#123;x:3,y:4&#125; &#123;x:3,y:5&#125; &#123;x:3,y:6&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  zip和combineLastest一样有可选参数用来定制输出数据。当然，也可以用map处理合并后的数组。</p>
+</li>
+<li><p>多重依赖问题<br>combineLastest产生的数据依赖于上游的多个数据流，如果上游的多个数据流又共同依赖于另一个数据流，这就是多重依赖问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> original$ = timer(<span class="number">0</span>, <span class="number">1000</span>);</span><br><span class="line"><span class="keyword">const</span> source1$ = original$ |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = original$ |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"b"</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = CombineLastest(source1$, source2$);</span><br></pre></td></tr></table></figure>
+<p>  这个例子不会像预期那样每隔一秒输出一组数据，具体自信执行试验。<br>  这种现象可以说是Rxjs的缺陷，原因是 <strong>虽然逻辑上这2个数据流是同时的，但是其实差了几纳秒</strong> 。<br>  要解决这个问题也很简单，我们选错了操作符罢了，这情况应该用withLastestFrom</p>
+</li>
+</ul>
+<h1 id="withLatestFrom"><a href="#withLatestFrom" class="headerlink" title="withLatestFrom"></a>withLatestFrom</h1><p>只有实例操作符。功能类似于combineLastest，但是withLastestFrom <strong>吐数据节奏是由调用它的数据流主导</strong> 的。弹珠图如下：<br><img src="http://p4yaly36s.bkt.clouddn.com/201805272305_770.png" alt=""><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;withLastestFrom&#125; <span class="keyword">from</span><span class="string">"rxjs/operators"</span></span><br><span class="line"><span class="keyword">const</span> source1$ = timer(<span class="number">0</span>, <span class="number">2000</span>) |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> <span class="number">100</span> * x);</span><br><span class="line"><span class="keyword">const</span> source2$ = timer(<span class="number">500</span>, <span class="number">1000</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = source1$ |&gt; withLatestFrom(source2$, (a, b) =&gt; a + b);<span class="comment">//101 203 305 407 ...</span></span><br></pre></td></tr></table></figure></p>
+<p>所有百分位都是由source1$产生的，所有个位都是由source2$产生的，每隔2秒吐出一个数据，可以很清楚的看到source1$占了主导地位。<br>所以用combineLastest产生多重依赖问题的例子可以用withLatestFrom解决：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;withLastestFrom&#125; <span class="keyword">from</span><span class="string">"rxjs/operators"</span></span><br><span class="line"><span class="keyword">const</span> original$ = timer(<span class="number">0</span>, <span class="number">1000</span>);</span><br><span class="line"><span class="keyword">const</span> source1$ = original$ |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = original$ |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"b"</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = source1$ |&gt; withLastestFrom(source2$);</span><br></pre></td></tr></table></figure></p>
+<p>combineLastest和withLatestFrom的选择：</p>
+<ul>
+<li>如果要合并完全独立的数据流，用combineLastest</li>
+<li>如果要吧一个数据流“映射”成一个新的数据流，同时要从其他数据流获取“最新数据”，用withlatestFrom</li>
+</ul>
+<h1 id="race"><a href="#race" class="headerlink" title="race"></a>race</h1><p>既有静态操作符也有实例操作符。第一个吐出数据的数据流获得胜利，race产生的数据流会完全采用胜者数据流的数据，其余的数据流会被退订。<strong>竞争是公平的，结果和参数顺序完全没有关系</strong></p>
+<h1 id="startWith"><a href="#startWith" class="headerlink" title="startWith"></a>startWith</h1><p>只有实例操作符。在一个数据流被订阅时先吐出若干个指定数据。startWith吐出的数据是同步的，想吐出异步数据可以用concat。其实startWith完全可以用concat实现，但是无论静态concat还是实例concat，“被塞进数据”的数据流只能当做参数（因为要塞在开头），这样就没法链式调用了，所以有了startWith。</p>
+<h1 id="forkJoin"><a href="#forkJoin" class="headerlink" title="forkJoin"></a>forkJoin</h1><p>只有静态操作符。接收多个数据流，等待所有数据流吐出最后一个数据（完结）后，forkjoin回吧所有输入的数据流产生的最后一个数据合并一个数据扔给下游。功能类比于Promise.all。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;forkJoin <span class="keyword">as</span> ForkJoin&#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = interval(<span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"a"</span>) |&gt; take(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = interval(<span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"b"</span>) |&gt; take(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = ForkJoin(source1$, source2$);<span class="comment">//3s后输出["0a", "2b"]</span></span><br></pre></td></tr></table></figure></p>
 
             </div>
           
