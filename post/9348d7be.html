@@ -35,17 +35,17 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/9348d7be.html"/>
 
 
-<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll">
+<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rxjs笔记（5）：合并类操作符">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/9348d7be.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll">
-<meta property="og:updated_time" content="2018-05-27T06:13:18.590Z">
+<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
+<meta property="og:updated_time" content="2018-05-27T09:58:18.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rxjs笔记（5）：合并类操作符">
-<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll">
+<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和 withLastestFrom   从多个数据流中选取第一个产生内容的数据流">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -132,25 +132,63 @@
             <table>
 <thead>
 <tr>
-<th>功能</th>
-<th style="text-align:center">适用操作符</th>
+<th style="text-align:left"><center>功能</center></th>
+<th style="text-align:left"><center>适用操作符</center></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>把多个操作符以头尾相连的方式合并</td>
-<td style="text-align:center">concat、concatAll</td>
+<td style="text-align:left">把多个操作符以头尾相连的方式合并</td>
+<td style="text-align:left"><a href="#concat">concat</a>、concatAll</td>
 </tr>
 <tr>
-<td>把多个操作符以先到先得的方式合并</td>
-<td style="text-align:center">merge、mergeAll</td>
+<td style="text-align:left">把多个操作符以先到先得的方式合并</td>
+<td style="text-align:left"><a href="#merge">merge</a>、mergeAll</td>
 </tr>
 <tr>
-<td>把多个操作符以一一对应的方式合并</td>
-<td style="text-align:center">zip、zipAll</td>
+<td style="text-align:left">把多个操作符以一一对应的方式合并</td>
+<td style="text-align:left">zip、zipAll</td>
+</tr>
+<tr>
+<td style="text-align:left">持续合并多个数据流中最新产生的数据</td>
+<td style="text-align:left">combineLastest、combineAll 和 withLastestFrom</td>
+</tr>
+<tr>
+<td style="text-align:left">从多个数据流中选取第一个产生内容的数据流</td>
+<td style="text-align:left">race</td>
+</tr>
+<tr>
+<td style="text-align:left">在数据流前面添加一个指定数据</td>
+<td style="text-align:left">startWith</td>
+</tr>
+<tr>
+<td style="text-align:left">只获取多个数据流最后产生的那个数据</td>
+<td style="text-align:left">forkJoin</td>
+</tr>
+<tr>
+<td style="text-align:left">从高阶数据流中切换数据源</td>
+<td style="text-align:left">switch 和 exhaust</td>
 </tr>
 </tbody>
 </table>
+<h1 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h1><p>即有静态操作符也有实例操作符。<strong>首尾相连依次</strong>合并多条数据流。作为静态操作符时可以接收任意个参数，从第一个数据流开始，前一个 Observable 完结后，订阅下一个 Observable。如果某一个 Observable 永不完结，则后面的数据流永远没机会上场。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态操作符</span></span><br><span class="line"><span class="keyword">import</span> &#123; concat &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = concat(source1$, source2$); <span class="comment">//1 2 3 4 5 6</span></span><br><span class="line"><span class="comment">//实例操作符</span></span><br><span class="line"><span class="keyword">import</span> &#123; concat &#125; <span class="keyword">from</span> <span class="string">"rxjs/operators"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = source1$ |&gt; concat(source2$); <span class="comment">//1 2 3 4 5 6</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意引用路径不同</strong>,如果一个 js 里要同时用 2 种 cancat，可以 import 的时候用 as 改名以示区分，如静态操作符改成大写开头：<code>import {concat as Concat} from &quot;rxjs&quot;</code></p>
+</blockquote>
+<h1 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h1><p>即有静态操作符也有实例操作符。先到先得。第一时间订阅所有数据流，然后对上游数据采取“先到先得”策略，任何一个 Observable 只要有数据推下来，就会立刻转给下游 Observable，merge 只有在所有上游数据都完结后才会完结自己产生的 Observable 对象。(<strong>如果 2 个数据同时生成，先订阅的数据流会先吐数据</strong>)<br><strong>merge 一般用来合并异步数据</strong>，如果合并同步数据，它是依次订阅所有上游数据的，也就是说当它订阅了第一个数据流后还没来得及订阅第二个数据流，就把数据全吐出来了</p>
+<ul>
+<li>数据汇流</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; merge <span class="keyword">as</span> Merge &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = timer(<span class="number">0</span>, <span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> a + <span class="string">"A"</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = timer(<span class="number">0</span>, <span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> a + <span class="string">"B"</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = Merge(source1$, source2$); <span class="comment">//1A 1B 2A 2B 3A 3B ...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; merge <span class="keyword">as</span> Merge &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = <span class="keyword">of</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = Merge(source1$, source2$); <span class="comment">//1 2 3 4 5 6</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>同步限流<br>merge 还可以接收一个可选参数，表示可以同时合并的 Observable 对象个数。比如<code>Merge(source1$, source2$, source3$, source4$, 2)</code>，<strong>当 source1 和 source2 中的其中一条数据流完结了，source3 才会开始吐数据</strong>，如果 source1 和 source2 都永不完结，则后面的数据流永远没机会上场</p>
+</li>
+<li><p>merge 应用场景通常情况下，我们一次只能从一个 DOM 元素获取一种类型事件，比如我们关心某个元素的 click 事件，同时也关心这个元素上的 touchend 事件，因为在移动设备上 touchend 出现的比 click 更早，这 2 个事件的处理是一模一样的，但是 fromEvent 不能同时获得 2 个事件的数据流，这时候可以用 merge。无论 click 事件发生还是 touchend 事件发生，都会流到 merge 产生的同一个 Observable 对象中，这样就可以统一用同一个事件处理函数 eventHandler 来处理。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; merge &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> click$ = fromEvent(elememt, <span class="string">"click"</span>);</span><br><span class="line"><span class="keyword">const</span> touchend$ = fromEvent(elememt, <span class="string">"touchend"</span>);</span><br><span class="line">merge(click$, touchend$).subscribe(eventHandler);</span><br></pre></td></tr></table></figure>
 
             </div>
           
