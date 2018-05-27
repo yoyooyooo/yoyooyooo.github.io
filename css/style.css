@@ -673,8 +673,8 @@ h6 {
       .post .post-content > table th,
       .post .post-content > table td {
         padding: 5px 15px;
-        border: 1px double #f0f0f0;
-        text-align: left; }
+        border: 1px double #dfdfdf;
+        text-align: center; }
     .post .post-content code,
     .post .post-content pre {
       padding: 7px;
