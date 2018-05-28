@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Rxjs笔记（6）：高阶Observable"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="yooo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myfavicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://yoyooyooo.github.io/post/84e7b2d7.html"/>
+
+
+<meta name="description" content="高阶 Observable高阶 Observable 打开了一扇大门，用一个 Observable 对象来管理多个 Observable 对象。实际处理多个数据流时，最土的办法就是每条数据流赋值给不同变量，然后操作这些变量，但是多处理几个问题后就会发现这些其实是重复的工作，完全可以抽象出来（类似于把多个类似的逻辑抽象函数，或者把多个类似普通函数抽象成高阶函数）。数据流虽然是用来管理数据的，但是数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjs笔记（6）：高阶Observable">
+<meta property="og:url" content="https://yoyooyooo.github.io/post/84e7b2d7.html">
+<meta property="og:site_name" content="yooo">
+<meta property="og:description" content="高阶 Observable高阶 Observable 打开了一扇大门，用一个 Observable 对象来管理多个 Observable 对象。实际处理多个数据流时，最土的办法就是每条数据流赋值给不同变量，然后操作这些变量，但是多处理几个问题后就会发现这些其实是重复的工作，完全可以抽象出来（类似于把多个类似的逻辑抽象函数，或者把多个类似普通函数抽象成高阶函数）。数据流虽然是用来管理数据的，但是数据">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805290013_586.png">
+<meta property="og:updated_time" content="2018-05-28T16:25:40.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjs笔记（6）：高阶Observable">
+<meta name="twitter:description" content="高阶 Observable高阶 Observable 打开了一扇大门，用一个 Observable 对象来管理多个 Observable 对象。实际处理多个数据流时，最土的办法就是每条数据流赋值给不同变量，然后操作这些变量，但是多处理几个问题后就会发现这些其实是重复的工作，完全可以抽象出来（类似于把多个类似的逻辑抽象函数，或者把多个类似普通函数抽象成高阶函数）。数据流虽然是用来管理数据的，但是数据">
+<meta name="twitter:image" content="http://p4yaly36s.bkt.clouddn.com/201805290013_586.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Rxjs笔记（6）：高阶Observable - yooo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">yooo</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Rxjs笔记（6）：高阶Observable
+        
+      </h1>
+
+      <time class="post-time">
+          May 28 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="高阶-Observable"><a href="#高阶-Observable" class="headerlink" title="高阶 Observable"></a><strong>高阶 Observable</strong></h1><p>高阶 Observable 打开了一扇大门，用一个 Observable 对象来管理多个 Observable 对象。实际处理多个数据流时，最土的办法就是每条数据流赋值给不同变量，然后操作这些变量，但是多处理几个问题后就会发现这些其实是重复的工作，完全可以抽象出来（类似于把多个类似的逻辑抽象函数，或者把多个类似普通函数抽象成高阶函数）。数据流虽然是用来管理数据的，但是数据流本身也可以被看成一个数据，也可以用 OBservable 来管理，让需要被管理的数据流成其他数据流的数据，用现成的 Observable 对象和操作符来管理这，这就是高阶 Observable 的意义</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">2</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">1500</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b));</span><br><span class="line"></span><br><span class="line">source$.subscribe(</span><br><span class="line">  a =&gt; &#123;</span><br><span class="line">    a.subscribe(<span class="function"><span class="params">a</span> =&gt;</span> <span class="built_in">console</span>.log(a)); <span class="comment">//0:0 1:0 0:1 1:1 ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">null</span>,</span><br><span class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">"done"</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>上面这个例子中 source$ 生成了 2 个一阶 Observable，这 2 个 Observable 在被吐出时被下游订阅，开始他们自己的节奏吐数据，这 2 个 Observable 间隔 1000ms 订阅，所以第二个 Observable 比第一个晚开始吐数据，最终呈现交叉数据。弹珠图可表示为：<br><img src="http://p4yaly36s.bkt.clouddn.com/201805290013_586.png" alt=""><br><strong>注意：高阶 Observable 内部生成的低阶 Observable 不会随主干的完结而完结，他们是独立的，有自己的生命周期</strong></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/post/9348d7be.html">
+        <span class="next-text nav-default">Rxjs笔记（5）：合并类操作符</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    owner: 'yoyooyooo',
+    repo: 'yoyooyooo.github.io',
+    oauth: {
+      client_id: '72a814ddc6eb790d7a5d',
+      client_secret: 'aa442e96984dcbd425a8131c825cc33f437d7c29',
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2018
+    <span class="footer-author">yoyo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
