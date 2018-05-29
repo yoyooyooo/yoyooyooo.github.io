@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="Rxjs笔记（5）：合并类操作符"/>
+  <meta name="description" content="Rxjs笔记（6）：合并类操作符"/>
 
 
 
@@ -35,19 +35,22 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/9348d7be.html"/>
 
 
-<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和withLatestFrom   从多个数据流中选取第一个产生内容的数据流 r">
+<meta name="description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll、withLatestFrom   从多个数据流中选取第一个产生内容的数据流 ra">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rxjs笔记（5）：合并类操作符">
+<meta property="og:title" content="Rxjs笔记（6）：合并类操作符">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/9348d7be.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和withLatestFrom   从多个数据流中选取第一个产生内容的数据流 r">
+<meta property="og:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll、withLatestFrom   从多个数据流中选取第一个产生内容的数据流 ra">
 <meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805272209_690.png">
 <meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805272305_770.png">
-<meta property="og:updated_time" content="2018-05-28T15:36:04.389Z">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805292340_526.png">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805292340_540.png">
+<meta property="og:image" content="http://p4yaly36s.bkt.clouddn.com/201805292340_540.png">
+<meta property="og:updated_time" content="2018-05-29T16:02:59.372Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rxjs笔记（5）：合并类操作符">
-<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll 和withLatestFrom   从多个数据流中选取第一个产生内容的数据流 r">
+<meta name="twitter:title" content="Rxjs笔记（6）：合并类操作符">
+<meta name="twitter:description" content="功能 适用操作符     把多个操作符以头尾相连的方式合并 concat、concatAll   把多个操作符以先到先得的方式合并 merge、mergeAll   把多个操作符以一一对应的方式合并 zip、zipAll   持续合并多个数据流中最新产生的数据 combineLastest、combineAll、withLatestFrom   从多个数据流中选取第一个产生内容的数据流 ra">
 <meta name="twitter:image" content="http://p4yaly36s.bkt.clouddn.com/201805272209_690.png">
 
 
@@ -73,7 +76,7 @@
 
 
 
-    <title> Rxjs笔记（5）：合并类操作符 - yooo </title>
+    <title> Rxjs笔记（6）：合并类操作符 - yooo </title>
   </head>
 
   <body>
@@ -119,12 +122,12 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Rxjs笔记（5）：合并类操作符
+          Rxjs笔记（6）：合并类操作符
         
       </h1>
 
       <time class="post-time">
-          May 27 2018
+          May 28 2018
       </time>
     </header>
 
@@ -142,19 +145,19 @@
 <tbody>
 <tr>
 <td style="text-align:left">把多个操作符以头尾相连的方式合并</td>
-<td style="text-align:left"><a href="#concat">concat</a>、concatAll</td>
+<td style="text-align:left"><a href="#concat">concat</a>、<a href="#concatAll">concatAll</a></td>
 </tr>
 <tr>
 <td style="text-align:left">把多个操作符以先到先得的方式合并</td>
-<td style="text-align:left"><a href="#merge">merge</a>、mergeAll</td>
+<td style="text-align:left"><a href="#merge">merge</a>、<a href="#mergeAll">mergeAll</a></td>
 </tr>
 <tr>
 <td style="text-align:left">把多个操作符以一一对应的方式合并</td>
-<td style="text-align:left"><a href="zip">zip</a>、zipAll</td>
+<td style="text-align:left"><a href="#zip">zip</a>、<a href="#zipAll">zipAll</a></td>
 </tr>
 <tr>
 <td style="text-align:left">持续合并多个数据流中最新产生的数据</td>
-<td style="text-align:left"><a href="#combineLastest">combineLastest</a>、combineAll 和<a href="#withLatestFrom">withLatestFrom</a></td>
+<td style="text-align:left"><a href="#combineLastest">combineLastest</a>、<a href="#conbineAll">combineAll</a>、<a href="#withLatestFrom">withLatestFrom</a></td>
 </tr>
 <tr>
 <td style="text-align:left">从多个数据流中选取第一个产生内容的数据流</td>
@@ -170,7 +173,7 @@
 </tr>
 <tr>
 <td style="text-align:left">从高阶数据流中切换数据源</td>
-<td style="text-align:left">switch 和 exhaust</td>
+<td style="text-align:left"><a href="#switch">switch</a>、<a href="#exhaust">exhaust</a></td>
 </tr>
 </tbody>
 </table>
@@ -234,6 +237,21 @@
 <h1 id="startWith"><a href="#startWith" class="headerlink" title="startWith"></a>startWith</h1><p>只有实例操作符。在一个数据流被订阅时先吐出若干个指定数据。startWith 吐出的数据是同步的，想吐出异步数据可以用 concat。其实 startWith 完全可以用 concat 实现，但是无论静态 concat 还是实例 concat，“被塞进数据”的数据流只能当做参数（因为要塞在开头），这样就没法链式调用了，所以有了 startWith。</p>
 <h1 id="forkJoin"><a href="#forkJoin" class="headerlink" title="forkJoin"></a>forkJoin</h1><p>只有静态操作符。接收多个数据流，等待所有数据流吐出最后一个数据（完结）后，forkjoin 回吧所有输入的数据流产生的最后一个数据合并一个数据扔给下游。功能类比于 Promise.all。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; forkJoin <span class="keyword">as</span> ForkJoin &#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</span><br><span class="line"><span class="keyword">const</span> source1$ = interval(<span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"a"</span>) |&gt; take(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> source2$ = interval(<span class="number">1000</span>) |&gt; map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="string">"b"</span>) |&gt; take(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> source$ = ForkJoin(source1$, source2$); <span class="comment">//3s后输出["0a", "2b"]</span></span><br></pre></td></tr></table></figure>
+<h1 id="接下来是一些高阶Observable-合并类操作符"><a href="#接下来是一些高阶Observable-合并类操作符" class="headerlink" title="接下来是一些高阶Observable 合并类操作符"></a><strong>接下来是一些高阶Observable 合并类操作符</strong></h1><h1 id="concatAll"><a href="#concatAll" class="headerlink" title="concatAll"></a>concatAll</h1><p>只有静态操作符。对上游的高阶Observable的所有内部Observable做concat的操作。<br><strong>注意：</strong>concatAll会依次订阅每个内部Observable，只有上一个内部Observable完结了再会继续订阅下一个，如果其中有一个内部Observable永不完结，会造成后续 <strong>内部Observable</strong> 的堆积从而造成内存泄漏<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">2</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">1500</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b) |&gt; take(<span class="number">2</span>))</span><br><span class="line">  |&gt; concatAll();</span><br><span class="line"></span><br><span class="line">source$.subscribe(<span class="function"><span class="params">a</span> =&gt;</span> <span class="built_in">console</span>.log(a), <span class="literal">null</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">"done"</span>));<span class="comment">// 0:0 0:1 1:0 1:1</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="zipAll"><a href="#zipAll" class="headerlink" title="zipAll"></a>zipAll</h1><p>只有静态操作符。一对一合并上游高阶Observable的内部Observable。<br><strong>如果上游高阶Observable不完结，zipAll不会开始工作，因为zipAll的工作方式是等待所有一阶Observable来实现一对一匹配，上游不完结表示ZipAll不知道还有没有新的一阶Observable，所以它会一直等下去。</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">2</span>)</span><br><span class="line">  |&gt; concat(never())</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">1500</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b) |&gt; take(<span class="number">2</span>))</span><br><span class="line">  |&gt; zipAll();</span><br><span class="line"></span><br><span class="line">source$.subscribe(<span class="function"><span class="params">a</span> =&gt;</span> <span class="built_in">console</span>.log(a), <span class="literal">null</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">"done"</span>));<span class="comment">// ["0:0", "1:0"] ["0:1", "1:1"]</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="combineAll"><a href="#combineAll" class="headerlink" title="combineAll"></a>combineAll</h1><p>只有静态操作符。对上游的高阶Observable做combineLastest的操作。和zipAll一样，如果上游高阶Observable不完结，它不会开始工作。</p>
+<h1 id="switchAll（V5叫switch）"><a href="#switchAll（V5叫switch）" class="headerlink" title="switchAll（V5叫switch）"></a>switchAll（V5叫switch）</h1><p>concatAll、zipAll和combineAll要么必须等第一个内部Observable完结才会继续下一个，要么需要等上游高阶Observable吐出所有一阶Observable才开始工作，这样就有了很大限制，没办法想获取哪条内部数据流里的数据就获取。<br>switch操作符总是切换到最新的内部数据流获取数据，每当上游高阶Observable产生一个内部数据流，switch就会退订上一个Observable，然后订阅新的内部Observable并开始吐出它的数据。换句话说，<strong>switchAll可以把高阶Observable转换为一阶Observable。</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">3</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">1500</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b) |&gt; take(<span class="number">2</span>))</span><br><span class="line">  |&gt; switchAll();  <span class="comment">//2:0 2:1</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://p4yaly36s.bkt.clouddn.com/201805292340_526.png" alt=""><br>上面的例子中，每次切到新的内部数据流，还没开始吐数据，就又切到新的内部数据流了，所以最终输出是2:0  2:1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">3</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">800</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b) |&gt; take(<span class="number">2</span>))</span><br><span class="line">  |&gt; switchAll();  <span class="comment">//0:0 1:0 2:0 2:1</span></span><br></pre></td></tr></table></figure>
+<div class="divider"></div>
+
+<p><img src="http://p4yaly36s.bkt.clouddn.com/201805292340_540.png" alt=""><br>上面的例子中，每次切到新的内部数据流后吐出一个数据才切到下一个新的内部数据流，所以最终输出是0:0 1:0 2:0 2:1</p>
+<blockquote>
+<p>也就是说，如果内部Observable吐得比上游高阶Observable快，那么新产生的Observable就会吐出第一个甚至更多的数据，最后会持续吐出最新的内部Observable的数据。<br><strong>注意：只有上游高阶Observable和当前内部Observable都完结的时候，switch才会完结，因为switch“既有横向发展又有纵向发展”</strong></p>
+</blockquote>
+<h1 id="exhaust"><a href="#exhaust" class="headerlink" title="exhaust"></a>exhaust</h1><p>和switchAll相反，exhaust会在产生新的内部Observable时判断老的内部Observable是否已完结，如果没完结，就继续老的，如果完结了，才会跳到新的内部Observable中。switchAll则是只要产生新的内部Observable就马上跳过去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> source$ =</span><br><span class="line">  interval(<span class="number">1000</span>)</span><br><span class="line">  |&gt; take(<span class="number">3</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> interval(<span class="number">700</span>) |&gt; map(<span class="function"><span class="params">b</span> =&gt;</span> a + <span class="string">":"</span> + b) |&gt; take(<span class="number">2</span>))</span><br><span class="line">  |&gt; exhaust(); <span class="comment">//0:0 1:0 2:0 2:1</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p4yaly36s.bkt.clouddn.com/201805292340_540.png" alt=""><br>上面例子中产生第二个内部Observable时第一个内部Observable未完结，所以第二个Observable被舍弃。产生第三个内部Observable时第一个已完结，所以跳到第三个内部Observable中继续吐数据。</p>
 
             </div>
           
@@ -252,15 +270,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/post/84e7b2d7.html">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Rxjs笔记（6）：高阶Observable</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
     
-    
-      <a class="next" href="/post/8efe00ac.html">
-        <span class="next-text nav-default">Rxjs笔记（4）：创建类操作符</span>
+      <a class="next" href="/post/84e7b2d7.html">
+        <span class="next-text nav-default">Rxjs笔记（5）：高阶Observable</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>
