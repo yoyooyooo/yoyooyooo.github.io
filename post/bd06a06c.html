@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Rxjs笔记（8）：过滤数据流"/>
+
+
+
+
+  <meta name="keywords" content="RXJS," />
+
+
+
+
+
+  <link rel="alternate" href="/default" title="yooo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myfavicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="https://yoyooyooo.github.io/post/bd06a06c.html"/>
+
+
+<meta name="description" content="功能 适用的操作符     过滤掉不满足条件的数据 filter   获得满足条件的第一个数据 first   获得满足条件的最后一个数据 last   从数据流中选取最先出现的若干数据 take   从数据流中选取最后出现的若干数据 takeLast   从数据流中选取数据直到某种情况发生 takeWhile、takeUntil   从数据流中忽略最先出现的若干数据 skip   从数据流">
+<meta name="keywords" content="RXJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjs笔记（8）：过滤数据流">
+<meta property="og:url" content="https://yoyooyooo.github.io/post/bd06a06c.html">
+<meta property="og:site_name" content="yooo">
+<meta property="og:description" content="功能 适用的操作符     过滤掉不满足条件的数据 filter   获得满足条件的第一个数据 first   获得满足条件的最后一个数据 last   从数据流中选取最先出现的若干数据 take   从数据流中选取最后出现的若干数据 takeLast   从数据流中选取数据直到某种情况发生 takeWhile、takeUntil   从数据流中忽略最先出现的若干数据 skip   从数据流">
+<meta property="og:updated_time" content="2018-05-31T14:35:14.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjs笔记（8）：过滤数据流">
+<meta name="twitter:description" content="功能 适用的操作符     过滤掉不满足条件的数据 filter   获得满足条件的第一个数据 first   获得满足条件的最后一个数据 last   从数据流中选取最先出现的若干数据 take   从数据流中选取最后出现的若干数据 takeLast   从数据流中选取数据直到某种情况发生 takeWhile、takeUntil   从数据流中忽略最先出现的若干数据 skip   从数据流">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Rxjs笔记（8）：过滤数据流 - yooo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">yooo</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Rxjs笔记（8）：过滤数据流
+        
+      </h1>
+
+      <time class="post-time">
+          May 31 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th style="text-align:left"><center>功能</center></th>
+<th style="text-align:left"><center>适用的操作符</center></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">过滤掉不满足条件的数据</td>
+<td style="text-align:left"><a href="#filter">filter</a></td>
+</tr>
+<tr>
+<td style="text-align:left">获得满足条件的第一个数据</td>
+<td style="text-align:left"><a href="#first">first</a></td>
+</tr>
+<tr>
+<td style="text-align:left">获得满足条件的最后一个数据</td>
+<td style="text-align:left"><a href="#last">last</a></td>
+</tr>
+<tr>
+<td style="text-align:left">从数据流中选取最先出现的若干数据</td>
+<td style="text-align:left"><a href="#take">take</a></td>
+</tr>
+<tr>
+<td style="text-align:left">从数据流中选取最后出现的若干数据</td>
+<td style="text-align:left"><a href="#takeLast">takeLast</a></td>
+</tr>
+<tr>
+<td style="text-align:left">从数据流中选取数据直到某种情况发生</td>
+<td style="text-align:left"><a href="#takeWhile">takeWhile</a>、<a href="#takeUntil">takeUntil</a></td>
+</tr>
+<tr>
+<td style="text-align:left">从数据流中忽略最先出现的若干数据</td>
+<td style="text-align:left">skip</td>
+</tr>
+<tr>
+<td style="text-align:left">从数据流中忽略数据直到某种情况发生</td>
+<td style="text-align:left">skipWhile、skipUntil</td>
+</tr>
+<tr>
+<td style="text-align:left">基于时间的数据流量筛选</td>
+<td style="text-align:left">throttleTime、debounceTime、auditTime</td>
+</tr>
+<tr>
+<td style="text-align:left">基于数据内容的数据流量筛选</td>
+<td style="text-align:left">throttle、debounce、audit</td>
+</tr>
+<tr>
+<td style="text-align:left">基于采样方式的数据流量筛选</td>
+<td style="text-align:left">sample、sampleTime</td>
+</tr>
+<tr>
+<td style="text-align:left">删除重复的数据</td>
+<td style="text-align:left">distnct</td>
+</tr>
+<tr>
+<td style="text-align:left">删除重复的连续数据</td>
+<td style="text-align:left">distnctUntilChanged、distinctUntilKeyChanged</td>
+</tr>
+<tr>
+<td style="text-align:left">忽略数据流中的所有数据</td>
+<td style="text-align:left">ignoreElements</td>
+</tr>
+<tr>
+<td style="text-align:left">只选取指定出现位置的数据</td>
+<td style="text-align:left">elementAt</td>
+</tr>
+<tr>
+<td style="text-align:left">判断是否只有一个数据满足判定条件</td>
+<td style="text-align:left">single</td>
+</tr>
+</tbody>
+</table>
+<p>过滤类操作符的主要作用就是判断一个数据是否有资格进入下游，用的是一个“判断函数”，“判断函数”返回 true 代表可以进入下游，否则被淘汰。几乎所有的过滤类操作符都有判定函数，部分还可以接受一个“结果选择器”，可以简单的对筛选后的结果做处理后再丢给下游，不指定结果选择器时会默认一个结果选择器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resultSelect = <span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>然而，在V6版本里，结果选择器都被移除了，官方鼓励你通过map等转换操作符先转换数据，再过滤，而不是过滤后通过结果选择器来“突然转换数据”，这样不直观，没法一眼扫过从选择器大概看出进行了哪些操作，其中说不定有某些结果选择器在扰乱视听，不符合纯函数的思想，具体看<a href="https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md#result-selectors" target="_blank" rel="noopener">result-selectors</a></strong></p>
+<h1 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h1><p>过滤掉不满足条件的数据,不支持结果选择器。只要数据满足条件，就会立刻进入下游</p>
+<h1 id="first"><a href="#first" class="headerlink" title="first"></a>first</h1><p>获得满足条件的第一个数据，接收第二个参数，在没有满足条件的数据时抛给下游一个默认值。如果直到上游完结也没有满足条件的数据，则向下游扔出一个error<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//筛选出第一个偶数，并且带着索性输出一个数组：</span></span><br><span class="line"><span class="comment">//V5（已废弃的写法）</span></span><br><span class="line"><span class="keyword">const</span> source$ = <span class="keyword">of</span>(<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">6</span>) </span><br><span class="line">    |&gt; first(<span class="function"><span class="params">a</span> =&gt;</span> a[<span class="number">0</span>] % <span class="number">2</span> === <span class="number">0</span>,(a, i) =&gt; [a, i]);</span><br><span class="line"><span class="comment">//V6</span></span><br><span class="line"><span class="keyword">const</span> source$ = <span class="keyword">of</span>(<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">6</span>) </span><br><span class="line">    |&gt; map(<span class="function">(<span class="params">a, i</span>) =&gt;</span> [a, i]) </span><br><span class="line">    |&gt; first(<span class="function"><span class="params">a</span> =&gt;</span> a[<span class="number">0</span>] % <span class="number">2</span> === <span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<h1 id="last"><a href="#last" class="headerlink" title="last"></a>last</h1><p>获得满足条件的最后一个数据，其他都和first一样，唯一要注意的是只有在完结的时候才吐出数据。</p>
+<h1 id="take"><a href="#take" class="headerlink" title="take"></a>take</h1><p>从上游“拿”若干个数据，拿够了就完结了。相当于可以拿多个数据的first</p>
+<h1 id="takeLast"><a href="#takeLast" class="headerlink" title="takeLast"></a>takeLast</h1><p>从数据流中选取最后出现的若干数据，只有上游完结的时候才决定吐出哪些数据，然后一次性吐出数据并立即完结，相当于可以拿多个数据的last</p>
+<h1 id="takeWhile"><a href="#takeWhile" class="headerlink" title="takeWhile"></a>takeWhile</h1><p>输出满足条件的数据，只要有一个数据不满足就立刻完结。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用takeWhile实现take</span></span><br><span class="line"><span class="keyword">const</span> myTake = <span class="function"><span class="params">count</span> =&gt;</span> source$ =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> source$ |&gt; takeWhile(<span class="function">(<span class="params">a, i</span>) =&gt;</span> i &lt; count);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> source$ = <span class="keyword">of</span>(<span class="number">1</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">13</span>) |&gt; myTake(<span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/RXJS/">RXJS</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/post/365a8411.html">
+        <span class="next-text nav-default">Rxjs笔记（7）：辅助类操作符</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    owner: 'yoyooyooo',
+    repo: 'yoyooyooo.github.io',
+    oauth: {
+      client_id: '72a814ddc6eb790d7a5d',
+      client_secret: 'aa442e96984dcbd425a8131c825cc33f437d7c29',
+    },
+  })
+  gitment.render('container')
+</script>
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2018
+    <span class="footer-author">yoyo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
