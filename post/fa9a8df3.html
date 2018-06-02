@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="Rxjs笔记（9）：操作符组合例子"/>
+  <meta name="description" content="Rxjs笔记（9）：操作符例子集合"/>
 
 
 
@@ -35,17 +35,17 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/fa9a8df3.html"/>
 
 
-<meta name="description" content="Rxjs最难的是怎么合理利用这么多操作符达到想要的目的，记录一些实验例子，可能不是最优解，主要为了增加熟练度，想尽量在实际例子中试试多用几个操作符感受感受。  记录5S内点击次数，可重复使用12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div id=&quot;text&quot;&amp;gt;&amp;lt;/div&amp;gt; 12345678910111213141516171">
+<meta name="description" content="Rxjs 最难的是怎么合理利用这么多操作符达到想要的目的，记录一些例子，可能不是最优解，主要为了增加不同操作符的熟练度  记录 5S 内点击次数，可重复使用5S内的所有点击都要捕获，所以用takeUntil(timer(5000))，但是计时不需要关心中间点的事件，只需点第一下后开始数5S即可。12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div">
 <meta name="keywords" content="RXJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rxjs笔记（9）：操作符组合例子">
+<meta property="og:title" content="Rxjs笔记（9）：操作符例子集合">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/fa9a8df3.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="Rxjs最难的是怎么合理利用这么多操作符达到想要的目的，记录一些实验例子，可能不是最优解，主要为了增加熟练度，想尽量在实际例子中试试多用几个操作符感受感受。  记录5S内点击次数，可重复使用12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div id=&quot;text&quot;&amp;gt;&amp;lt;/div&amp;gt; 12345678910111213141516171">
-<meta property="og:updated_time" content="2018-06-02T13:28:35.099Z">
+<meta property="og:description" content="Rxjs 最难的是怎么合理利用这么多操作符达到想要的目的，记录一些例子，可能不是最优解，主要为了增加不同操作符的熟练度  记录 5S 内点击次数，可重复使用5S内的所有点击都要捕获，所以用takeUntil(timer(5000))，但是计时不需要关心中间点的事件，只需点第一下后开始数5S即可。12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div">
+<meta property="og:updated_time" content="2018-06-02T16:11:43.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rxjs笔记（9）：操作符组合例子">
-<meta name="twitter:description" content="Rxjs最难的是怎么合理利用这么多操作符达到想要的目的，记录一些实验例子，可能不是最优解，主要为了增加熟练度，想尽量在实际例子中试试多用几个操作符感受感受。  记录5S内点击次数，可重复使用12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div id=&quot;text&quot;&amp;gt;&amp;lt;/div&amp;gt; 12345678910111213141516171">
+<meta name="twitter:title" content="Rxjs笔记（9）：操作符例子集合">
+<meta name="twitter:description" content="Rxjs 最难的是怎么合理利用这么多操作符达到想要的目的，记录一些例子，可能不是最优解，主要为了增加不同操作符的熟练度  记录 5S 内点击次数，可重复使用5S内的所有点击都要捕获，所以用takeUntil(timer(5000))，但是计时不需要关心中间点的事件，只需点第一下后开始数5S即可。12&amp;lt;button id=&quot;btn&quot;&amp;gt;test&amp;lt;/button&amp;gt;&amp;lt;div">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -70,7 +70,7 @@
 
 
 
-    <title> Rxjs笔记（9）：操作符组合例子 - yooo </title>
+    <title> Rxjs笔记（9）：操作符例子集合 - yooo </title>
   </head>
 
   <body>
@@ -116,7 +116,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Rxjs笔记（9）：操作符组合例子
+          Rxjs笔记（9）：操作符例子集合
         
       </h1>
 
@@ -130,10 +130,12 @@
     
             <div class="post-content">
             <blockquote>
-<p>Rxjs最难的是怎么合理利用这么多操作符达到想要的目的，记录一些实验例子，可能不是最优解，主要为了增加熟练度，想尽量在实际例子中试试多用几个操作符感受感受。</p>
+<p>Rxjs 最难的是怎么合理利用这么多操作符达到想要的目的，记录一些例子，可能不是最优解，主要为了增加不同操作符的熟练度</p>
 </blockquote>
-<h1 id="记录5S内点击次数，可重复使用"><a href="#记录5S内点击次数，可重复使用" class="headerlink" title="记录5S内点击次数，可重复使用"></a>记录5S内点击次数，可重复使用</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//计时</span></span><br><span class="line"><span class="keyword">const</span> timer$ =</span><br><span class="line">  fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>)</span><br><span class="line">  |&gt; map(</span><br><span class="line">    () =&gt;</span><br><span class="line">      timer(<span class="number">5000</span>)</span><br><span class="line">      |&gt; map(<span class="function"><span class="params">a</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="string">"5S时间到,得分："</span> + num;</span><br><span class="line">        num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">      &#125;)</span><br><span class="line">  )</span><br><span class="line">  |&gt; exhaust();</span><br><span class="line"><span class="comment">//点击</span></span><br><span class="line"><span class="keyword">const</span> click$ =</span><br><span class="line">  fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>)</span><br><span class="line">  |&gt; takeUntil(timer(<span class="number">5000</span>))</span><br><span class="line">  |&gt; repeat();</span><br><span class="line"></span><br><span class="line">timer$.subscribe(<span class="function"><span class="params">a</span> =&gt;</span> <span class="built_in">console</span>.log(a), <span class="literal">null</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">"done"</span>));</span><br><span class="line">click$.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">"#text"</span>).innerHTML = ++num;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="记录-5S-内点击次数，可重复使用"><a href="#记录-5S-内点击次数，可重复使用" class="headerlink" title="记录 5S 内点击次数，可重复使用"></a>记录 5S 内点击次数，可重复使用</h1><p>5S内的所有点击都要捕获，所以用<code>takeUntil(timer(5000))</code>，但是计时不需要关心中间点的事件，只需点第一下后开始数5S即可。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//计时流，take(1)很关键，不然点击几次就打印机次</span></span><br><span class="line"><span class="keyword">const</span> timer$ =</span><br><span class="line">  fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>)</span><br><span class="line">  |&gt; take(<span class="number">1</span>)</span><br><span class="line">  |&gt; delay(<span class="number">5000</span>)</span><br><span class="line">  |&gt; repeat();</span><br><span class="line"><span class="comment">//点击流</span></span><br><span class="line"><span class="keyword">const</span> click$ =</span><br><span class="line">  fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>)</span><br><span class="line">  |&gt; takeUntil(timer(<span class="number">5000</span>))</span><br><span class="line">  |&gt; repeat();</span><br><span class="line"></span><br><span class="line">timer$.subscribe(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="string">"5S时间到,得分："</span> + num;</span><br><span class="line">    num = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">null</span>,</span><br><span class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">"done"</span>)</span><br><span class="line">);</span><br><span class="line">click$.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">"#text"</span>).innerHTML = ++num;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//计时流这样也行</span></span><br><span class="line"><span class="keyword">const</span> timer$ =</span><br><span class="line">  fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">"#btn"</span>), <span class="string">"click"</span>)</span><br><span class="line">  |&gt; map(<span class="function"><span class="params">()</span> =&gt;</span> timer(<span class="number">5000</span>))</span><br><span class="line">  |&gt; exhaust();</span><br></pre></td></tr></table></figure>
+
             </div>
           
 
