@@ -466,8 +466,7 @@ h6 {
   margin: 0 auto;
   max-width: 1000px;
   flex: 1;
-  width: 95%;
-  animation: show 0.5s ease forwards; }
+  width: 95%; }
 
 @media (min-width: 480px) {
   #content {
@@ -479,7 +478,11 @@ h6 {
 
 #primary {
   max-width: 900px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  animation: show-left 0.5s ease forwards; }
+
+#secondary {
+  animation: show-right 0.5s ease forwards; }
 
 @media only screen and (max-width: 750px) {
   .site-header-inner,
@@ -490,13 +493,21 @@ h6 {
   #primary.home {
     width: 100%; } }
 
-@keyframes show {
+@keyframes show-left {
   0% {
     opacity: 0;
     transform: translateY(50px); }
   100% {
     opacity: 1;
     transform: translateY(0px); } }
+
+@keyframes show-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0px); } }
 
 .header {
   padding: 20px 20px; }
