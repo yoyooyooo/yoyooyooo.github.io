@@ -466,7 +466,8 @@ h6 {
   margin: 0 auto;
   max-width: 1000px;
   flex: 1;
-  width: 95%; }
+  width: 95%;
+  animation: show 0.5s ease forwards; }
 
 @media (min-width: 480px) {
   #content {
@@ -488,6 +489,14 @@ h6 {
     display: none; }
   #primary.home {
     width: 100%; } }
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(50px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0px); } }
 
 .header {
   padding: 20px 20px; }
@@ -615,38 +624,32 @@ h6 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content h2 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content h3 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content h4 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content h5 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content h6 {
       font-size: 1.3em;
       font-weight: 400;
       font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
-      margin-top: 1.2em;
-      border-top: 1px solid #ccc; }
+      margin-top: 1.2em; }
     .post .post-content .headerlink:hover {
       border-bottom: 0; }
     .post .post-content .headerlink::before {
