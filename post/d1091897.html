@@ -33,17 +33,17 @@
 <link rel="canonical" href="https://yoyooyooo.github.io/post/d1091897.html"/>
 
 
-<meta name="description" content="gulp 常用插件/相关库vinyl 虚拟文件对象流vinyl-fs 用于读取指定路径的文件并封装成 vinyl 格式的对象流，或者将 vinyl 对象流写入文件系统指定路径，该工具该支持 glob，该工具其实是 gulp 的 src 和 dest 的底层实现vinyl-source-stream 把可读流转换为 vinyl 对象gulp-streamify 将一个使用 buffer 的插件的输出">
+<meta name="description" content="gulp 是基于流的前端自动化构架工具。api 很简单，就主要是要理解常规流和 Vinyl 文件对象，还有 gulp 插件是支持 Buffer 和 Stream，还是两者之一。具体不展开了，主要记录下 gulp 相关的实用的插件/库。 gulp 常用插件/相关库vinyl 虚拟文件对象流，gulp 使用了 vinyl-fs，vinyl-fs 使用 vinyl 文件对象——一种“虚拟文件格式”。vi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gulp笔记">
 <meta property="og:url" content="https://yoyooyooo.github.io/post/d1091897.html">
 <meta property="og:site_name" content="yooo">
-<meta property="og:description" content="gulp 常用插件/相关库vinyl 虚拟文件对象流vinyl-fs 用于读取指定路径的文件并封装成 vinyl 格式的对象流，或者将 vinyl 对象流写入文件系统指定路径，该工具该支持 glob，该工具其实是 gulp 的 src 和 dest 的底层实现vinyl-source-stream 把可读流转换为 vinyl 对象gulp-streamify 将一个使用 buffer 的插件的输出">
+<meta property="og:description" content="gulp 是基于流的前端自动化构架工具。api 很简单，就主要是要理解常规流和 Vinyl 文件对象，还有 gulp 插件是支持 Buffer 和 Stream，还是两者之一。具体不展开了，主要记录下 gulp 相关的实用的插件/库。 gulp 常用插件/相关库vinyl 虚拟文件对象流，gulp 使用了 vinyl-fs，vinyl-fs 使用 vinyl 文件对象——一种“虚拟文件格式”。vi">
 <meta property="og:image" content="https://yoyo-1257904590.cos.ap-shanghai.myqcloud.com/blog/gulp-2018-12-9.png">
-<meta property="og:updated_time" content="2018-12-09T10:00:39.147Z">
+<meta property="og:updated_time" content="2018-12-09T14:38:21.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gulp笔记">
-<meta name="twitter:description" content="gulp 常用插件/相关库vinyl 虚拟文件对象流vinyl-fs 用于读取指定路径的文件并封装成 vinyl 格式的对象流，或者将 vinyl 对象流写入文件系统指定路径，该工具该支持 glob，该工具其实是 gulp 的 src 和 dest 的底层实现vinyl-source-stream 把可读流转换为 vinyl 对象gulp-streamify 将一个使用 buffer 的插件的输出">
+<meta name="twitter:description" content="gulp 是基于流的前端自动化构架工具。api 很简单，就主要是要理解常规流和 Vinyl 文件对象，还有 gulp 插件是支持 Buffer 和 Stream，还是两者之一。具体不展开了，主要记录下 gulp 相关的实用的插件/库。 gulp 常用插件/相关库vinyl 虚拟文件对象流，gulp 使用了 vinyl-fs，vinyl-fs 使用 vinyl 文件对象——一种“虚拟文件格式”。vi">
 <meta name="twitter:image" content="https://yoyo-1257904590.cos.ap-shanghai.myqcloud.com/blog/gulp-2018-12-9.png">
 
 
@@ -128,7 +128,8 @@
 
     
             <div class="post-content">
-            <h1 id="gulp-常用插件-相关库"><a href="#gulp-常用插件-相关库" class="headerlink" title="gulp 常用插件/相关库"></a>gulp 常用插件/相关库</h1><p>vinyl 虚拟文件对象流<br>vinyl-fs 用于读取指定路径的文件并封装成 vinyl 格式的对象流，或者将 vinyl 对象流写入文件系统指定路径，该工具该支持 glob，该工具其实是 gulp 的 src 和 dest 的底层实现<br>vinyl-source-stream 把可读流转换为 vinyl 对象<br>gulp-streamify 将一个使用 buffer 的插件的输出转化为一个可读流<br>gulp-data 往文件对象里添加属性，方便其他流取出来用<br>gulp-rename 重命名文件<br>run-sequence 管理任务顺序和并行<br>gulp-plumber 错误自启动<br>gulp-wrap 文件前后包点字符串什么的<br>gulp-beautify 代码美化<br>gulp-if 根据条件选择是否加载插件<br>gulp-debug 方便调试用，打印匹配到的文件<br>gulp-replace 文件字符串替换<br>gulp-size 打印当前流所有文件的总大小/单个文件大小<br>gulp-add-src 在管道中的任何位置新增 src<br>gulp-prompt 根据命令行输入/选择执行不同任务，用到了 Inquirer.js<br>merge2 合并多个流</p>
+            <p>gulp 是基于流的前端自动化构架工具。api 很简单，就主要是要理解常规流和 Vinyl 文件对象，还有 gulp 插件是支持 Buffer 和 Stream，还是两者之一。具体不展开了，主要记录下 gulp 相关的实用的插件/库。</p>
+<h1 id="gulp-常用插件-相关库"><a href="#gulp-常用插件-相关库" class="headerlink" title="gulp 常用插件/相关库"></a>gulp 常用插件/相关库</h1><p>vinyl 虚拟文件对象流，gulp 使用了 vinyl-fs，vinyl-fs 使用 vinyl 文件对象——一种“虚拟文件格式”。<br>vinyl-fs 用于读取指定路径的文件并封装成 vinyl 格式的对象流，或者将 vinyl 对象流写入文件系统指定路径，该工具该支持 glob，该工具其实是 gulp 的 src 和 dest 的底层实现<br>vinyl-source-stream 把可读流转换为 vinyl 对象<br>vinyl-named 把文件的 basename 放到文件对象的 named 属性上，basename 可以由你传入一个方法 return 来设置。<a href="https://github.com/shama/webpack-stream" target="_blank" rel="noopener">webpac-stream</a> 需要用到这个 named 属性，作为入口文件。<br>gulp-streamify 将一个使用 buffer 的插件的输出转化为一个可读流<br>gulp-data 往文件对象里添加属性，方便其他流取出来用<br>gulp-rename 重命名文件<br>run-sequence 管理任务顺序和并行<br>gulp-plumber 错误自启动<br>gulp-wrap 文件前后包点字符串什么的<br>gulp-beautify 代码美化<br>gulp-if 根据条件选择是否加载插件<br>gulp-debug 方便调试用，打印匹配到的文件<br>gulp-replace 文件字符串替换<br>gulp-size 打印当前流所有文件的总大小/单个文件大小<br>gulp-add-src 在管道中的任何位置新增 src<br>gulp-prompt 根据命令行输入/选择执行不同任务，用到了 Inquirer.js<br>merge2 合并多个流<br><a href="https://github.com/dominictarr/event-stream" target="_blank" rel="noopener">event-stream</a> 包含很多关于流的方法，内部其实也引了很多其他库</p>
 <h1 id="gulp-插件"><a href="#gulp-插件" class="headerlink" title="gulp 插件"></a>gulp 插件</h1><p>gulp 的插件要求尽量只做一件事，大多都用 <a href="https://github.com/rvagg/through2" target="_blank" rel="noopener">though2</a> 这个库。<br>through2 是对 node.js 原生 stream.Transform 进行的封装，省去了每次 new 一个 transform 流，让你可以专注写_transform 方法。gulp 里要用 through2.obj（objectMode 模式），一个基本的 gulp 插件大概是这样子的：<br><img src="https://yoyo-1257904590.cos.ap-shanghai.myqcloud.com/blog/gulp-2018-12-9.png" alt=""></p>
 <blockquote>
 <p>上面提到的大部分 gulp 插件都是 through2 实现的，源码都很简单</p>
