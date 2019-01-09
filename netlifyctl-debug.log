@@ -1,0 +1,9 @@
+time="09 Jan 19 20:27 +0800" level=debug msg=PreRun arguments=[] command=init 
+time="09 Jan 19 20:27 +0800" level=debug msg="configure debug middleware" 
+time="09 Jan 19 20:27 +0800" level=debug msg="configure logging middleware" 
+time="09 Jan 19 20:27 +0800" level=debug msg="setup logger middleware: panic" 
+time="09 Jan 19 20:27 +0800" level=debug msg="configure auth middleware" 
+time="09 Jan 19 20:27 +0800" level=debug msg="setup credentials" credentials=0x879c70 
+time="09 Jan 19 20:27 +0800" level=debug msg="configure client middleware" 
+time="09 Jan 19 20:27 +0800" level=debug msg="setup API endpoint" endpoint="https://api.netlify.com" 
+time="09 Jan 19 20:27 +0800" level=error msg="command failed" error="repository not exists" 

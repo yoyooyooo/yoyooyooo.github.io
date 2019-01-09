@@ -1,3 +1,0 @@
-# yoyooyooo.github.io
-
-blog
